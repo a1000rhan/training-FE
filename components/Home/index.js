@@ -16,8 +16,9 @@ const Home = ({ navigation }) => {
       <View style={styles.inHome}>
         <Text style={styles.mainTitle}> Training Courses</Text>
         <Image
+          width={200}
           style={styles.logo}
-          source={require("../../assets/GBK_logo.svg")}
+          source={require("../../assets/GBK_logo.png")}
         />
         <Image
           style={styles.homeImage}
@@ -28,7 +29,7 @@ const Home = ({ navigation }) => {
           onPress={() => navigation.replace("CourseList")}
           style={styles.homebtn}
         >
-          <Text style={styles.btnText}> See the courses </Text>
+          <Text style={styles.btnText}> Start Learning </Text>
         </Button>
       </View>
     </View>
@@ -69,8 +70,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logo: {
-    width: 200,
-    height: 200,
+    marginTop: 30,
   },
   homeImage: {
     width: 300,
