@@ -9,13 +9,22 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { TextInput } from "react-native-paper";
+import data from "../../data";
+import CourseItem from "./CourseItem";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const CourseList = () => {
+const CourseList = ({ navigation }) => {
   const [query, setQuery] = useState("");
 
+  const courseArr = data
+    .filter((course) =>
+      course.title.toLowerCase().includes(query.toLowerCase())
+    )
+    .map((course) => (
+      <CourseItem course={course} key={course._id} navigation={navigation} />
+    ));
   return (
     <>
       <View style={styles.searchBar}>
@@ -23,7 +32,7 @@ const CourseList = () => {
           style={styles.searchBar}
           placeholder="Search..."
           onChangeText={(event) => setQuery(event)}
-          left={<TextInput.Icon name="search" />}
+          left={<TextInput.Icon name="eye" />}
         />
       </View>
       <View style={styles.header}>
@@ -70,7 +79,7 @@ const styles = StyleSheet.create({
     zIndex: 20,
     width: "95%",
     alignSelf: "center",
-    borderRadius: 20,
+    borderRadius: 5,
     shadowColor: "#171717",
     shadowOffset: { width: -2, height: 3 },
     shadowOpacity: 0.2,
