@@ -18,10 +18,11 @@ import authStore from "../../stores/AuthStore";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
+import { observer } from "mobx-react";
 
 const CourseList = ({ navigation }) => {
   const [query, setQuery] = useState("");
-  if (courseStore.loading || authStore.loading) {
+  if (courseStore.loading && authStore.loading) {
     <Text>is loading</Text>;
   }
 
@@ -81,7 +82,7 @@ const CourseList = ({ navigation }) => {
   );
 };
 
-export default CourseList;
+export default observer(CourseList);
 
 const styles = StyleSheet.create({
   header: {

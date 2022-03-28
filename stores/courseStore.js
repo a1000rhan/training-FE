@@ -19,5 +19,4 @@ class CourseStore {
 }
 
 const courseStore = new CourseStore();
-
 export default courseStore;
