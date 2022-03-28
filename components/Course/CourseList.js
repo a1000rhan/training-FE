@@ -29,10 +29,8 @@ const CourseList = ({ navigation }) => {
     <>
       <View style={styles.searchBar}>
         <TextInput
-          style={styles.searchBar}
           placeholder="Search..."
           onChangeText={(event) => setQuery(event)}
-          left={<TextInput.Icon name="eye" />}
         />
       </View>
       <View style={styles.header}>
@@ -46,7 +44,7 @@ const CourseList = ({ navigation }) => {
         </View>
       </View>
 
-      <ScrollView style={styles.scroll}></ScrollView>
+      <ScrollView style={styles.scroll}>{courseArr}</ScrollView>
     </>
   );
 };
@@ -75,9 +73,10 @@ const styles = StyleSheet.create({
   bg: {},
   searchBar: {
     position: "absolute",
-    marginTop: windowHeight / 8,
+    marginTop: windowHeight / 5,
     zIndex: 20,
     width: "95%",
+
     alignSelf: "center",
     borderRadius: 5,
     shadowColor: "#171717",
