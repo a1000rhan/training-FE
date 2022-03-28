@@ -3,11 +3,17 @@ import { StyleSheet, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../components/Home";
 import CourseList from "../components/Course/CourseList";
+import Signup from "../components/AuthUser/Signup";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator  >
+      <Stack.Screen
+        name="Signup"
+        options={{ headerShown: false }}
+        component={Signup}
+      />
       <Stack.Screen
         name="Home"
         options={{ headerShown: false }}
