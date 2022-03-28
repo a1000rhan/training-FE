@@ -12,7 +12,7 @@ const data = [
   },
   {
     _id: 2,
-    title: "Azure",
+    title: "Azure Training ",
     location: "Indian",
     languages: ["Arabic"],
     skills: ["JavaScript", "FrontEnd", "BackEnd"],

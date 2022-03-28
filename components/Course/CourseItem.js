@@ -1,8 +1,15 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
-import { Avatar, Button } from "react-native-paper";
+import { Button } from "react-native-paper";
+import { Avatar } from "native-base";
 
 const CourseItem = ({ course, navigation }) => {
   return (
@@ -12,21 +19,19 @@ const CourseItem = ({ course, navigation }) => {
       }}
     >
       <View style={styles.card}>
-        <Avatar.Image
-          source={{
-            uri: course.image
-              ? course.image
-              : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
-          }}
-          style={styles.img}
-          size={80}
-        />
+        <ImageBackground
+          imageStyle={styles.bg}
+          style={styles.bgItem}
+          source={require("../../assets/Lesson-amico.png")}
+        >
+          <View style={styles.txt}>
+            <Text style={styles.courseTitle}>{course.title}</Text>
+          </View>
 
-        <View>
-          <Text style={styles.courseTitle}>{course.title}</Text>
-        </View>
-
-        <Button style={styles.btn}>Book</Button>
+          <Button style={styles.btn} justifyContent={"center"} color={"white"}>
+            <Text style={styles.btnTxt}>Enroll</Text>
+          </Button>
+        </ImageBackground>
       </View>
     </Pressable>
   );
@@ -36,11 +41,7 @@ export default CourseItem;
 
 const styles = StyleSheet.create({
   card: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: "100%",
+    width: "95%",
     height: 120,
     shadowColor: "#000",
     shadowOffset: {
@@ -53,10 +54,25 @@ const styles = StyleSheet.create({
     margin: 10,
     elevation: 8,
   },
+  bg: {
+    paddingTop: 200,
+    width: "70%",
+  },
+  bgItem: {
+    overflow: "hidden",
+    height: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  txt: {
+    width: "50%",
+  },
   courseTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#6867AC",
+    color: "#4f5156",
   },
   price: {
     fontSize: 20,
@@ -68,7 +84,13 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: 45,
-    width: 80,
-    backgroundColor: "#6867AC",
+    width: 100,
+
+    backgroundColor: "#173E7A",
+  },
+  btnTxt: {
+    fontWeight: "bold",
+    color: "#fff",
+    fontSize: 15,
   },
 });
