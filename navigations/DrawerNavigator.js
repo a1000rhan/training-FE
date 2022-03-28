@@ -3,7 +3,6 @@ import { StyleSheet, Text } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/Ionicons";
 
-import COLORS from "../color";
 import CustomDrawerContent from "./CustomDrawerContent";
 import CourseList from "../components/Course/CourseList";
 
@@ -20,17 +19,16 @@ const DrawerNavigator = () => {
         component={CourseList}
         options={{
           drawerIcon: ({ color }) => {
-            <Icon name="home-outline" size={22} color={color} />;
+            <Icon name="home-outline" size={22} />;
           },
           drawerActiveBackgroundColor: "#E7E6FF",
           drawerLabelStyle: { color: "#6867AC", fontWeight: "bold" },
           headerTitle: () => {
             <Text>
               {"Maids"}
-              <Icon name="home-outline" size={22} color={color} />
+              <Icon name="home-outline" size={22} />
             </Text>;
           },
-          headerShown: false,
           headerTitleStyle: { fontSize: 40, color: "white" },
         }}
       />
@@ -51,19 +49,9 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontWeight: "bold",
   },
-  logout: ({ pressed }) => [
-    {
-      backgroundColor: pressed ? COLORS.secondary : "white",
-      width: "95%",
-      alignSelf: "center",
-      flexDirection: "row",
-      alignItems: "center",
-      marginLeft: 20,
-    },
-  ],
+
   logText: {
     fontWeight: "bold",
     marginLeft: 10,
-    color: COLORS.main,
   },
 });
