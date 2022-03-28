@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import { TextInput } from "react-native-paper";
+import { Input } from "native-base";
 import data from "../../data";
 import CourseItem from "./CourseItem";
 
@@ -28,9 +28,18 @@ const CourseList = ({ navigation }) => {
   return (
     <>
       <View style={styles.searchBar}>
-        <TextInput
+        <Input
+          w={350}
+          h={39}
+          borderColor="#6867AC"
+          borderRadius={30}
           placeholder="Search..."
           onChangeText={(event) => setQuery(event)}
+          InputLeftElement={
+            <View style={styles.searchIcon}>
+              <Icon name="search" marginLeft={1} size={23} alignSelf="center" />
+            </View>
+          }
         />
       </View>
       <View style={styles.header}>
@@ -75,20 +84,22 @@ const styles = StyleSheet.create({
   bg: {},
   searchBar: {
     position: "absolute",
-    marginTop: windowHeight / 5,
+    marginTop: windowHeight / 4,
     zIndex: 20,
-    width: "95%",
-
     alignSelf: "center",
-    borderRadius: 5,
+    borderRadius: 20,
     shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 3 },
+    shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
     backgroundColor: "#F2F2F2",
   },
 
   searchIcon: {
+    borderRadius: 30,
+    width: 35,
+    height: 35,
+    marginLeft: 10,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
