@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   Dimensions,
+  Image,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Input } from "native-base";
@@ -52,6 +53,10 @@ const CourseList = ({ navigation }) => {
               navigation.toggleDrawer();
             }}
           />
+          <Image
+            style={styles.topImg}
+            source={require("../../assets/Lesson.png")}
+          />
         </View>
       </View>
 
@@ -77,8 +82,9 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   topImg: {
+    width: 200,
+    height: 200,
     position: "absolute",
-    marginTop: 30,
     marginLeft: windowWidth / 5,
   },
   bg: {},

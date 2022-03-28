@@ -4,7 +4,7 @@ const data = [
     title: "AWS",
     location: "Indian",
     languages: ["Arabic"],
-    skills: ["JavaScript", "FrontEnd", "BackEnd"],
+    skills: ["JavaScript", "FrontEnd", "BackEnd", "Node"],
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/800px-Amazon_Web_Services_Logo.svg.png",
     description:
@@ -12,10 +12,10 @@ const data = [
   },
   {
     _id: 2,
-    title: "Azure",
+    title: "Azure Training ",
     location: "Indian",
     languages: ["Arabic"],
-    skills: ["JavaScript", "FrontEnd", "BackEnd"],
+    skills: ["JavaScript", "FrontEnd"],
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Microsoft_Azure.svg/1200px-Microsoft_Azure.svg.png",
     description:
