@@ -22,7 +22,11 @@ const CourseItem = ({ course, navigation }) => {
         <ImageBackground
           imageStyle={styles.bgCard}
           style={styles.bgItem}
-          source={{ uri: course.image }}
+          source={
+            course.image
+              ? { uri: course.image }
+              : require("../../assets/Lesson-amico.png")
+          }
         >
           <View style={styles.txt}>
             <Text style={styles.courseTitle}>{course.title}</Text>
@@ -74,7 +78,7 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   courseTitle: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#4f5156",
   },

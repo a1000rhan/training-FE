@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import CustomDrawerContent from "./CustomDrawerContent";
 import CourseList from "../components/Course/CourseList";
+import UserProfile from "../components/Profile/UserProfile";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,17 +19,24 @@ const DrawerNavigator = () => {
         name="CourseList"
         component={CourseList}
         options={{
-          drawerIcon: ({ color }) => {
+          drawerIcon: () => {
             <Icon name="home-outline" size={22} />;
           },
-          drawerActiveBackgroundColor: "#E7E6FF",
-          drawerLabelStyle: { color: "#6867AC", fontWeight: "bold" },
-          headerTitle: () => {
-            <Text>
-              {"Maids"}
-              <Icon name="home-outline" size={22} />
-            </Text>;
+          drawerActiveBackgroundColor: "#edeff2",
+          drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
+          headerShown: false,
+          headerTitleStyle: { fontSize: 40, color: "white" },
+        }}
+      />
+      <Drawer.Screen
+        name="UserProfile"
+        component={UserProfile}
+        options={{
+          drawerIcon: () => {
+            <Icon name="home-outline" size={22} />;
           },
+          drawerActiveBackgroundColor: "#edeff2",
+          drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
           headerShown: false,
           headerTitleStyle: { fontSize: 40, color: "white" },
         }}

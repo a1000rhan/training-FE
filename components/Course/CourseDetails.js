@@ -6,7 +6,7 @@ import { Chip } from "react-native-paper";
 const CourseDetails = ({ route, navigation }) => {
   const course = route.params.course;
 
-  const skillsArr = course.skills.map((skill, index) => (
+  const skillsArr = course.skills?.map((skill, index) => (
     <Chip key={index} style={styles.skl}>
       <Text style={styles.txtSkill}>{skill}</Text>
     </Chip>
@@ -35,6 +35,14 @@ const CourseDetails = ({ route, navigation }) => {
         <View style={styles.card}>
           <Text style={styles.subTitle}>Skills</Text>
           <View style={styles.bubbles}>{skillsArr}</View>
+        </View>
+        <View style={styles.card}>
+          <Text style={styles.subTitle}>Available Seats</Text>
+          <Text style={styles.txt}>{course.maxSeats}</Text>
+        </View>
+        <View style={styles.card}>
+          <Text style={styles.subTitle}>Location</Text>
+          <Text style={styles.txt}>{course.location}</Text>
         </View>
       </ScrollView>
     </>

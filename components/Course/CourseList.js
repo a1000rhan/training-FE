@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { Input } from "native-base";
 import data from "../../data";
 import CourseItem from "./CourseItem";
+import courseStore from "../../stores/courseStore";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -19,7 +20,12 @@ const windowHeight = Dimensions.get("window").height;
 const CourseList = ({ navigation }) => {
   const [query, setQuery] = useState("");
 
-  const courseArr = data
+  console.log(
+    "🚀 ~ file: CourseList.js ~ line 23 ~ CourseList ~ courseStore.course",
+    courseStore.course
+  );
+
+  const courseArr = courseStore.course
     .filter((course) =>
       course.title.toLowerCase().includes(query.toLowerCase())
     )

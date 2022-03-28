@@ -7,6 +7,8 @@ import {
 import { StyleSheet, Text, View } from "react-native";
 import { Avatar } from "react-native-paper";
 import COLORS from "../color";
+import authStore from "../stores/AuthStore";
+import { observer } from "mobx-react";
 
 // import { observer } from "mobx-react";
 
@@ -15,12 +17,13 @@ function CustomDrawerContent(props) {
     <DrawerContentScrollView {...props}>
       <View style={styles.user}>
         <Avatar.Image
-          size={200}
+          size={40}
           source={{
             uri: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
           }}
         />
       </View>
+      <Text>{authStore.user ? authStore.user.staffId : "User"}</Text>
       <View
         style={{
           borderBottomColor: "gray",
@@ -34,7 +37,7 @@ function CustomDrawerContent(props) {
   );
 }
 
-export default CustomDrawerContent;
+export default observer(CustomDrawerContent);
 
 const styles = StyleSheet.create({
   user: {
