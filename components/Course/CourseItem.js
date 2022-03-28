@@ -14,11 +14,12 @@ const CourseItem = ({ course, navigation }) => {
       <View style={styles.card}>
         <Avatar.Image
           source={{
-            uri: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
+            uri: course.image
+              ? course.image
+              : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
           }}
-          w={100}
-          h={100}
-          m={3}
+          style={styles.img}
+          size={80}
         />
 
         <View>

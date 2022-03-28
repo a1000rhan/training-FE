@@ -26,7 +26,7 @@ const Home = ({ navigation }) => {
         />
 
         <Button
-          onPress={() => navigation.replace("CourseList")}
+          onPress={() => navigation.replace("Drawer")}
           style={styles.homebtn}
         >
           <Text style={styles.btnText}> Start Learning </Text>
