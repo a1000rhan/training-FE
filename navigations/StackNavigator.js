@@ -7,27 +7,25 @@ import DrawerNavigator from "./DrawerNavigator";
 import CourseList from "../components/Course/CourseList";
 import Signup from "../components/AuthUser/Signup";
 
-
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator  >
-      <Stack.Screen
-        name="Signup"
-        options={{ headerShown: false }}
-        component={Signup}
-      />
+    <Stack.Navigator>
       <Stack.Screen
         name="Home"
         options={{ headerShown: false }}
         component={Home}
       />
       <Stack.Screen
+        name="Signup"
+        options={{ headerShown: false }}
+        component={Signup}
+      />
+      <Stack.Screen
         name="Drawer"
         component={DrawerNavigator}
         options={{ headerShown: false }}
       />
-      
 
       <Stack.Screen
         name="Details"

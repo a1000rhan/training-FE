@@ -6,8 +6,8 @@ import { Chip } from "react-native-paper";
 const CourseDetails = ({ route, navigation }) => {
   const course = route.params.course;
 
-  const skillsArr = course.skills.map((skill) => (
-    <Chip style={styles.skl}>
+  const skillsArr = course.skills.map((skill, index) => (
+    <Chip key={index} style={styles.skl}>
       <Text style={styles.txtSkill}>{skill}</Text>
     </Chip>
   ));
