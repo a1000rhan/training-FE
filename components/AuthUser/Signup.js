@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 
-import { StyleSheet, View,Center,VStack,Heading,HStack,Button} from "react-native";
+import {StyleSheet,View} from "react-native";
 
-import {  TextInput } from "react-native-paper";
+import {
+  Button,
+  Center,
+  FormControl,
+  Heading,
+  HStack,
+  Input,
+  useToast,
+  VStack,
+  Text,
+} from "native-base";
 
 import COLORS from "../../color";
 
@@ -10,48 +20,51 @@ import authStore from "../../stores/AuthStore";
 import { observer } from "mobx-react";
 
 
-const Signup = ({ navigation }) => {
 
+const Signup = ({ navigation }) => {
   
-  const [user, setUser] = useState({
-    staffId: "",
-    password: "",
-    confirmPassword: "",
-  
-  });
 
   const handleSubmit =  () => {
      authStore.signup(user);
     if (authStore.user) navigation.replace("CourseList");
   };
+  
 
   return (
     <Center w="100%">
       <View style={styles.container}>
-        <Heading>Sign up to continue!</Heading>
+        <Heading>Create an Account</Heading>
 
-        <View space={3} mt="5">
-          
-            <TextInput
-            label="Staff ID"
-            onChangeText={(value) => setUser({ ...user, staffId: value })}
+        <VStack space={3} mt="5">
+          <FormControl>
+            <FormControl.Label>Staff ID</FormControl.Label>
+            <Input
+              onChangeText={(value) => setUser({ ...user, staffId: value })}
+              
             />
-          
+          </FormControl>
 
-          <TextInput
-            label="Password"
-            onChangeText={(value) => setUser({ ...user, password: value })}
+          <FormControl>
+            <FormControl.Label>Password</FormControl.Label>
+            <Input
+              type="password"
+              onChangeText={(value) => setUser({ ...user, password: value })}
             />
+          </FormControl>
 
-           <TextInput
-            label="Confirm Password"
-            onChangeText={(value) => setUser({ ...user,confirmPassword: value })}
-            /> 
+          <FormControl>
+            <FormControl.Label>Confirm Password</FormControl.Label>
+            <Input type="password" onChangeText={(value) => {}} />
+          </FormControl>
+    
           <Button style={styles.btn} onPress={handleSubmit}>
             Sign Up
           </Button>
-          <View mt="6" justifyContent="center"></View>
-        </View>
+          <Button style={styles.btn} onPress={() => navigation.goBack()}>
+            Back
+          </Button>
+          <HStack mt="6" justifyContent="center"></HStack>
+        </VStack>
       </View>
     </Center>
   );
@@ -65,6 +78,7 @@ const styles = StyleSheet.create({
     height: "95%",
     display: "flex",
     justifyContent: "center",
+    alignSelf:"center",
     backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {
@@ -80,7 +94,7 @@ const styles = StyleSheet.create({
   btn: {
     height: 50,
     width: "100%",
-    backgroundColor: COLORS.main,
+    backgroundColor: COLORS.blue,
     marginTop: 20,
     borderRadius: 7,
     justifyContent: "center",
@@ -96,4 +110,8 @@ const styles = StyleSheet.create({
   label: {
     margin: 8,
   },
+  tac:{
+    alignSelf:"center",
+    fontSize:10
+  }
 });
