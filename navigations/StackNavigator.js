@@ -14,7 +14,11 @@ const StackNavigator = () => {
         options={{ headerShown: false }}
         component={Home}
       />
-      <Stack.Screen name="Drawer" component={DrawerNavigator} />
+      <Stack.Screen
+        name="Drawer"
+        component={DrawerNavigator}
+        options={{ headerShown: false }}
+      />
 
       <Stack.Screen name="Details" component={CourseDetails} />
     </Stack.Navigator>

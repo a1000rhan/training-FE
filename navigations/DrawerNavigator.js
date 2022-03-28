@@ -29,6 +29,7 @@ const DrawerNavigator = () => {
               <Icon name="home-outline" size={22} />
             </Text>;
           },
+          headerShown: false,
           headerTitleStyle: { fontSize: 40, color: "white" },
         }}
       />

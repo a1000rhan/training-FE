@@ -39,7 +39,9 @@ const CourseList = ({ navigation }) => {
             color={"white"}
             name="reorder-three"
             size={30}
-            onPress={() => {}}
+            onPress={() => {
+              navigation.toggleDrawer();
+            }}
           />
         </View>
       </View>
