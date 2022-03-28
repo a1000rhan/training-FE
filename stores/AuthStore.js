@@ -27,27 +27,32 @@ class AuthStore {
         title: "Sign in Successfully",
         status: "success",
       });
-      navigation.navigate("Maids");
+      
     } catch (error) {
       console.log(error);
     }
   };
 
-  signUpUser = async (user, toast, navigation) => {
+  signUpUser = async (user, navigation, toast) => {
     try {
-      const resp = await api.post("/user/signup", user);
+      const resp = await api.put("/user", user);
       this.setUser(resp.data.token);
       this.loading = false;
       toast.show({
-        title: "Sign in Successfully",
-        status: "success",
+          title: "Sign in Successfully",
+          status: "success",
       });
-      navigation.navigate("Maids");
+       
+      navigation.navigate("Drawer")  
     } catch (error) {
+        toast.show({
+            title: "Sign in Failed",
+            status: "error",
+        })
       console.log(error);
-    }
+      
   };
-
+  }
   signOut = async () => {
     delete api.defaults.headers.common.Authorization;
     this.user = null;

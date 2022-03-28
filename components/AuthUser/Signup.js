@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import {StyleSheet,View} from "react-native";
+import {StyleSheet,View } from "react-native";
 
 import {
   Button,
@@ -9,9 +9,10 @@ import {
   Heading,
   HStack,
   Input,
-  useToast,
   VStack,
+  useToast,
   Text,
+  
 } from "native-base";
 
 import COLORS from "../../color";
@@ -22,11 +23,19 @@ import { observer } from "mobx-react";
 
 
 const Signup = ({ navigation }) => {
+  const toast = useToast();
+  const [user, setUser] = useState({
+    staffId: "",
+    password: "",
+    confirmPassword:"",
+    
+  });
   
 
   const handleSubmit =  () => {
-     authStore.signup(user);
-    if (authStore.user) navigation.replace("CourseList");
+
+     authStore.signUpUser(user, navigation,toast);
+  
   };
   
 
