@@ -19,5 +19,5 @@ class CourseStore {
 }
 
 const courseStore = new CourseStore();
-courseStore.fetchCourse();
+
 export default courseStore;

@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 import decode from "jwt-decode";
 import api from "./api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import courseStore from "./courseStore";
 
 class AuthStore {
   user = null;
@@ -27,7 +27,6 @@ class AuthStore {
         title: "Sign in Successfully",
         status: "success",
       });
-      
     } catch (error) {
       console.log(error);
     }
@@ -37,22 +36,21 @@ class AuthStore {
     try {
       const resp = await api.put("/user", user);
       this.setUser(resp.data.token);
+      courseStore.fetchCourse();
+      navigation.navigate("Drawer");
       this.loading = false;
       toast.show({
-          title: "Sign in Successfully",
-          status: "success",
+        title: "Sign in Successfully",
+        status: "success",
       });
-       
-      navigation.navigate("Drawer")  
     } catch (error) {
-        toast.show({
-            title: "Sign in Failed",
-            status: "error",
-        })
+      toast.show({
+        title: "Sign in Failed",
+        status: "error",
+      });
       console.log(error);
-      
+    }
   };
-  }
   signOut = async () => {
     delete api.defaults.headers.common.Authorization;
     this.user = null;
