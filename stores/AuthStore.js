@@ -36,13 +36,13 @@ class AuthStore {
     try {
       const resp = await api.put("/user", user);
       this.setUser(resp.data.token);
-      courseStore.fetchCourse();
       navigation.navigate("Drawer");
       this.loading = false;
       toast.show({
         title: "Sign in Successfully",
         status: "success",
       });
+      courseStore.fetchCourse();
     } catch (error) {
       toast.show({
         title: "Sign in Failed",

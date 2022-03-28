@@ -14,13 +14,14 @@ import { Input } from "native-base";
 import data from "../../data";
 import CourseItem from "./CourseItem";
 import courseStore from "../../stores/courseStore";
+import authStore from "../../stores/AuthStore";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const CourseList = ({ navigation }) => {
   const [query, setQuery] = useState("");
-  if (courseStore.loading) {
+  if (courseStore.loading || authStore.loading) {
     <Text>is loading</Text>;
   }
 
