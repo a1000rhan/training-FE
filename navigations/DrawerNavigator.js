@@ -23,6 +23,7 @@ const DrawerNavigator = () => {
             <Icon name="home-outline" size={22} />;
           },
           drawerActiveBackgroundColor: "#edeff2",
+          drawerLabel: "Course List",
           drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
           headerShown: false,
           headerTitleStyle: { fontSize: 40, color: "white" },
@@ -36,6 +37,7 @@ const DrawerNavigator = () => {
             <Icon name="home-outline" size={22} />;
           },
           drawerActiveBackgroundColor: "#edeff2",
+          drawerLabel: "Profile",
           drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
           headerShown: false,
           headerTitleStyle: { fontSize: 40, color: "white" },

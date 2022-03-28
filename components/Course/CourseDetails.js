@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   Title: {
-    fontSize: 30,
+    fontSize: 40,
     alignSelf: "center",
     color: "white",
     fontWeight: "bold",

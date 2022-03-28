@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions,
   Image,
+  ImageBackground,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Input } from "native-base";
@@ -19,6 +20,9 @@ const windowHeight = Dimensions.get("window").height;
 
 const CourseList = ({ navigation }) => {
   const [query, setQuery] = useState("");
+  if (courseStore.loading) {
+    <Text>is loading</Text>;
+  }
 
   const courseArr = courseStore.course
     .filter((course) =>
@@ -60,8 +64,18 @@ const CourseList = ({ navigation }) => {
           />
         </View>
       </View>
-
-      <ScrollView style={styles.scroll}>{courseArr}</ScrollView>
+      <ImageBackground
+        imageStyle={{
+          opacity: 0.1,
+          width: "80%",
+          height: "80%",
+          paddingLeft: 1000,
+        }}
+        style={styles.bg}
+        source={require("../../assets/Lesson.png")}
+      >
+        <ScrollView style={styles.scroll}>{courseArr}</ScrollView>
+      </ImageBackground>
     </>
   );
 };
@@ -88,7 +102,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginLeft: windowWidth / 5,
   },
-  bg: {},
+  bg: {
+    width: "100%",
+    height: "100%",
+  },
   searchBar: {
     position: "absolute",
     marginTop: windowHeight / 4,
@@ -111,5 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  scroll: { backgroundColor: "#FFFAFC" },
+  scroll: {
+    marginTop: 20,
+  },
 });
