@@ -29,7 +29,11 @@ const StackNavigator = () => {
       />
       
 
-      <Stack.Screen name="Details" component={CourseDetails} />
+      <Stack.Screen
+        name="Details"
+        component={CourseDetails}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
