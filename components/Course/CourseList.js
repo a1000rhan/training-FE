@@ -20,11 +20,6 @@ const windowHeight = Dimensions.get("window").height;
 const CourseList = ({ navigation }) => {
   const [query, setQuery] = useState("");
 
-  console.log(
-    "🚀 ~ file: CourseList.js ~ line 23 ~ CourseList ~ courseStore.course",
-    courseStore.course
-  );
-
   const courseArr = courseStore.course
     .filter((course) =>
       course.title.toLowerCase().includes(query.toLowerCase())
