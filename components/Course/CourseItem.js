@@ -20,9 +20,9 @@ const CourseItem = ({ course, navigation }) => {
     >
       <View style={styles.card}>
         <ImageBackground
-          imageStyle={styles.bg}
+          imageStyle={styles.bgCard}
           style={styles.bgItem}
-          source={require("../../assets/Lesson-amico.png")}
+          source={{ uri: course.image }}
         >
           <View style={styles.txt}>
             <Text style={styles.courseTitle}>{course.title}</Text>
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   card: {
     width: "95%",
     height: 120,
+    alignSelf: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -54,10 +55,13 @@ const styles = StyleSheet.create({
     margin: 10,
     elevation: 8,
   },
-  bg: {
+
+  bgCard: {
     paddingTop: 200,
     width: "70%",
+    opacity: 0.2,
   },
+
   bgItem: {
     overflow: "hidden",
     height: "100%",
@@ -74,11 +78,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#4f5156",
   },
-  price: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#6867AC",
-  },
+
   country: {
     marginTop: 10,
   },
