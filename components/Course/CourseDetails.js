@@ -1,16 +1,32 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View,Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Chip } from "react-native-paper";
+import courseStore from "../../stores/courseStore";
+import { Button } from "native-base";
+import COLORS from "../../color";
+import authStore from "../../stores/AuthStore";
+import { observer } from "mobx-react";
+import Icon2 from "react-native-vector-icons/AntDesign";
+
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const CourseDetails = ({ route, navigation }) => {
   const course = route.params.course;
 
+  if(courseStore.loading){<Text>loading</Text>}
   const skillsArr = course.skills?.map((skill, index) => (
     <Chip key={index} style={styles.skl}>
       <Text style={styles.txtSkill}>{skill}</Text>
     </Chip>
   ));
+
+  const handleRemove = () => {
+    courseStore.deleteCourse(course._id);
+    navigation.navigate("CourseList");
+  };
 
   return (
     <>
@@ -19,11 +35,23 @@ const CourseDetails = ({ route, navigation }) => {
           <Icon
             color={"white"}
             name="arrow-back-circle-sharp"
+            style={{marginLeft:15}}
             size={35}
             onPress={() => {
               navigation.navigate("Drawer");
             }}
           />
+           {authStore.user?._id === course.owner._id && (
+     
+          <Icon2
+            color={"white"}
+            style={{marginRight:15}}
+            name="delete"
+            size={30}
+            onPress={handleRemove}
+          />
+     
+        )}
         </View>
         <Text style={styles.Title}>{course.title}</Text>
       </View>
@@ -44,12 +72,13 @@ const CourseDetails = ({ route, navigation }) => {
           <Text style={styles.subTitle}>Location</Text>
           <Text style={styles.txt}>{course.location}</Text>
         </View>
+       
       </ScrollView>
     </>
   );
 };
 
-export default CourseDetails;
+export default observer(CourseDetails);
 
 const styles = StyleSheet.create({
   header: {
@@ -62,8 +91,11 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginTop: 50,
-    marginLeft: 15,
     zIndex: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    display: "flex",
+    width: "100%",
   },
 
   card: {
@@ -86,7 +118,20 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: "white",
     fontWeight: "bold",
+   marginLeft: windowWidth/3.5,
+   position:"absolute",
+ 
   },
+  btn: {
+    height: 50,
+    width: "100%",
+    backgroundColor: COLORS.blue,
+    marginTop: 20,
+    borderRadius: 7,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  
   subTitle: {
     fontSize: 20,
     fontWeight: "bold",
