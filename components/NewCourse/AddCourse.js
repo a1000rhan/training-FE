@@ -13,7 +13,7 @@ const AddCourse = ({ navigation }) => {
     image: "",
     location: "",
   });
-  const [isPickerShow, setIsPickerShow] = useState(true);
+  const [isPickerShow, setIsPickerShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date(Date.now()));
   const [endDate, setEndDate] = useState(new Date(Date.now()));
   const [startTime, setStartTime] = useState(new Date(Date.now()));

@@ -1,8 +1,14 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Chip } from "react-native-paper";
-
+import { observer } from "mobx-react";
+import COLORS from "../../color";
+import courseStore from "../../stores/courseStore";
+import authStore from "../../stores/AuthStore";
+import { Button } from "native-base";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const CourseDetails = ({ route, navigation }) => {
   const course = route.params.course;
 
@@ -25,7 +31,9 @@ const CourseDetails = ({ route, navigation }) => {
             }}
           />
         </View>
-        <Text style={styles.Title}>{course.title}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.Title}>{course.title}</Text>
+        </View>
       </View>
       <ScrollView>
         <View style={styles.card}>
@@ -44,12 +52,19 @@ const CourseDetails = ({ route, navigation }) => {
           <Text style={styles.subTitle}>Location</Text>
           <Text style={styles.txt}>{course.location}</Text>
         </View>
+        {/* {course.students.some((student) => student === authStore.profile._id)()} */}
+        <Button
+          style={styles.btn}
+          onPress={() => courseStore.joinCourse(course, navigation)}
+        >
+          Enroll
+        </Button>
       </ScrollView>
     </>
   );
 };
 
-export default CourseDetails;
+export default observer(CourseDetails);
 
 const styles = StyleSheet.create({
   header: {
@@ -57,7 +72,7 @@ const styles = StyleSheet.create({
     height: 230,
     borderRadius: 20,
     display: "flex",
-
+    marginBottom: 10,
     flexDirection: "row",
   },
   icon: {
@@ -71,6 +86,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     shadowColor: "#000",
+    borderRadius: 20,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -81,10 +97,19 @@ const styles = StyleSheet.create({
     margin: 10,
     elevation: 8,
   },
+  titleContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: windowHeight / 9,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   Title: {
-    fontSize: 40,
+    fontSize: 50,
+
     alignSelf: "center",
     color: "white",
+
     fontWeight: "bold",
   },
   subTitle: {
@@ -106,4 +131,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#B92F1A",
   },
   txtSkill: { color: "white", fontWeight: "bold" },
+  btn: {
+    height: 50,
+    width: "75%",
+    backgroundColor: COLORS.blue,
+    alignSelf: "center",
+    marginTop: 20,
+    borderRadius: 7,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btnText: { fontWeight: "bold", color: "#fff", fontSize: 15 },
 });

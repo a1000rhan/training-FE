@@ -10,6 +10,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import { Button } from "react-native-paper";
 import { Avatar } from "native-base";
+import courseStore from "../../stores/courseStore";
 
 const CourseItem = ({ course, navigation }) => {
   return (
@@ -32,7 +33,12 @@ const CourseItem = ({ course, navigation }) => {
             <Text style={styles.courseTitle}>{course.title}</Text>
           </View>
 
-          <Button style={styles.btn} justifyContent={"center"} color={"white"}>
+          <Button
+            style={styles.btn}
+            justifyContent={"center"}
+            color={"white"}
+            onPress={() => courseStore.joinCourse(course)}
+          >
             <Text style={styles.btnTxt}>Enroll</Text>
           </Button>
         </ImageBackground>
@@ -49,6 +55,7 @@ const styles = StyleSheet.create({
     height: 120,
     alignSelf: "center",
     shadowColor: "#000",
+    borderRadius: 20,
     shadowOffset: {
       width: 0,
       height: 2,
