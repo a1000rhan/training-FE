@@ -16,6 +16,15 @@ class CourseStore {
       console.log(error);
     }
   };
+  createCourse = async (course) => {
+    try {
+      const res = await api.post("/courses", course);
+      this.course = res.data;
+      this.loading = false;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 const courseStore = new CourseStore();
