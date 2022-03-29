@@ -16,9 +16,22 @@ class CourseStore {
       console.log(error);
     }
   };
-  createCourse = async (course) => {
+  createCourse = async (course, navigation) => {
     try {
-      const res = await api.post("/courses", course);
+      const formData = new FormData();
+      for (const key in course) formData.append(key, course[key]);
+
+      const res = await api({
+        method: "POST",
+        url: "/courses",
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+        transformRequest: (data, error) => {
+          return formData;
+        },
+      });
+      this.fetchCourse();
+      navigation.navigate("Drawer");
       this.course = res.data;
       this.loading = false;
     } catch (error) {

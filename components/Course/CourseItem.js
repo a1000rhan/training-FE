@@ -10,6 +10,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import { Button } from "react-native-paper";
 import { Avatar } from "native-base";
+import { baseURL } from "../../stores/api";
 
 const CourseItem = ({ course, navigation }) => {
   return (
@@ -24,7 +25,7 @@ const CourseItem = ({ course, navigation }) => {
           style={styles.bgItem}
           source={
             course.image
-              ? { uri: course.image }
+              ? { uri: baseURL + course.image }
               : require("../../assets/Lesson-amico.png")
           }
         >

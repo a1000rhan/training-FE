@@ -4,6 +4,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import moment from "moment";
 
 const AddCourse = ({ navigation }) => {
   const [course, setCourse] = useState({
@@ -18,6 +19,10 @@ const AddCourse = ({ navigation }) => {
   const [endDate, setEndDate] = useState(new Date(Date.now()));
   const [startTime, setStartTime] = useState(new Date(Date.now()));
   const [endTime, setEndTime] = useState(new Date(Date.now()));
+
+  const showPicker = () => {
+    setIsPickerShow(true);
+  };
 
   const onChangeStartDate = (event, value) => {
     setStartDate(value);
@@ -39,9 +44,25 @@ const AddCourse = ({ navigation }) => {
   };
   const onChangeEndTime = (event, value) => {
     setEndTime(value);
+
     if (Platform.OS === "android") {
       setIsPickerShow(false);
     }
+  };
+  const handleSubmit = () => {
+    let tempCourse = {
+      ...course,
+      date: `${moment(startDate).format("YYYY-MM-DD")} - ${moment(
+        endDate
+      ).format("YYYY-MM-DD")}`,
+
+      time: `${moment(startTime).format("HH:mm")} - ${moment(endTime).format(
+        "HH:mm"
+      )}`,
+    };
+
+    setCourse(tempCourse);
+    navigation.navigate("Categories", { course, tempCourse });
   };
 
   return (
@@ -62,39 +83,44 @@ const AddCourse = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.comp}>
           <Text style={styles.label}>Course Title</Text>
-          <TextInput style={styles.input} placeholder={"Enter Course Title"} />
+          <TextInput
+            style={styles.input}
+            placeholder={"Enter Course Title"}
+            onChangeText={(value) => setCourse({ ...course, title: value })}
+          />
         </View>
         <View style={styles.comp}>
           <Text style={styles.label}>Description:</Text>
           <TextInput
             style={styles.input}
             placeholder={"Enter Course Description"}
+            onChangeText={(value) =>
+              setCourse({ ...course, description: value })
+            }
           />
         </View>
-        <View style={styles.comp}>
-          <Text style={styles.label}>Skills</Text>
-          <TextInput style={styles.input} placeholder={"Enter Course Title"} />
-        </View>
+
         <View style={styles.comp}>
           <Text style={styles.label}>Time & Date</Text>
           <Text style={styles.smlabel}>Date</Text>
           <View style={styles.date}>
             {isPickerShow && (
-              <DateTimePicker
-                value={startDate}
-                mode={"date"}
-                display={Platform.OS === "ios" ? "" : "default"}
-                is24Hour={true}
-                onChange={onChangeStartDate}
-                style={styles.datePicker}
-              />
+              <>
+                <DateTimePicker
+                  value={startDate}
+                  dateFormat="DD-MM-YY"
+                  mode={"date"}
+                  display={Platform.OS === "ios" ? "" : "default"}
+                  onChange={onChangeStartDate}
+                  style={styles.datePicker}
+                />
+              </>
             )}
             {isPickerShow && (
               <DateTimePicker
                 value={endDate}
                 mode={"date"}
                 display={Platform.OS === "ios" ? "" : "default"}
-                is24Hour={true}
                 onChange={onChangeEndDate}
                 style={styles.datePicker}
               />
@@ -107,7 +133,6 @@ const AddCourse = ({ navigation }) => {
                 value={startTime}
                 mode={"time"}
                 display={Platform.OS === "ios" ? "" : "default"}
-                is24Hour={true}
                 onChange={onChangeStartTime}
                 style={styles.datePicker}
               />
@@ -117,7 +142,6 @@ const AddCourse = ({ navigation }) => {
                 value={endTime}
                 mode={"time"}
                 display={Platform.OS === "ios" ? "" : "default"}
-                is24Hour={true}
                 onChange={onChangeEndTime}
                 style={styles.datePicker}
               />
@@ -126,10 +150,14 @@ const AddCourse = ({ navigation }) => {
         </View>
         <View style={styles.comp}>
           <Text style={styles.label}>Location</Text>
-          <TextInput style={styles.input} placeholder={"Enter Course Title"} />
+          <TextInput
+            style={styles.input}
+            placeholder={"Enter Course Title"}
+            onChangeText={(value) => setCourse({ ...course, location: value })}
+          />
         </View>
-        <Button style={styles.btn}>
-          <Text style={styles.btnTxt}>Add Course</Text>
+        <Button style={styles.btn} onPress={() => handleSubmit()}>
+          <Text style={styles.btnTxt}>Next</Text>
         </Button>
       </View>
     </>

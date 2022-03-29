@@ -8,6 +8,7 @@ import CourseList from "../components/Course/CourseList";
 import Signup from "../components/AuthUser/Signup";
 import AddCourse from "../components/NewCourse/AddCourse";
 import Signin from "../components/AuthUser/Signin";
+import Categories from "../components/NewCourse/Categories";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -23,7 +24,7 @@ const StackNavigator = () => {
         options={{ headerShown: false }}
         component={Home}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="Signin"
         options={{ headerShown: false }}
         component={Signin}
@@ -42,6 +43,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="AddCourse"
         component={AddCourse}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Categories"
+        component={Categories}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
