@@ -4,16 +4,39 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,Pressable } from "react-native";
+import LogoutIcon from "react-native-vector-icons/MaterialIcons";
 import { Avatar } from "react-native-paper";
 import COLORS from "../color";
 import authStore from "../stores/AuthStore";
 import { observer } from "mobx-react";
 
+
 // import { observer } from "mobx-react";
 
 function CustomDrawerContent(props) {
   console.log(authStore.user);
+
+  const checkUser = () => {
+    if (authStore.user) {
+      return authStore.user.staffId;
+    } 
+    
+  };
+  const checkForLogout = () => {
+    if (authStore.user) {
+      return (
+        <Pressable
+          style={styles.logout}
+          onPress={() => authStore.signOut()}
+        >
+          <LogoutIcon size={22} color={COLORS.blue} name="logout" />
+          <Text style={styles.logText}>Logout</Text>
+        </Pressable>
+      );
+    }
+  };
+
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.user}>
@@ -26,6 +49,7 @@ function CustomDrawerContent(props) {
         <Text style={styles.username}>
           {authStore.user ? authStore.user.staffId : "User"}
         </Text>
+        <Text style={styles.username}>{checkUser()}</Text>
       </View>
       <View
         style={{
@@ -36,9 +60,10 @@ function CustomDrawerContent(props) {
         }}
       />
       <DrawerItemList {...props} />
+      {checkForLogout()}
     </DrawerContentScrollView>
-  );
-}
+      
+  ); }
 
 export default observer(CustomDrawerContent);
 
@@ -55,7 +80,7 @@ const styles = StyleSheet.create({
   },
   logout: ({ pressed }) => [
     {
-      backgroundColor: pressed ? COLORS.secondary : "white",
+      backgroundColor: pressed ? COLORS.blue : "white",
       width: "95%",
       alignSelf: "center",
       flexDirection: "row",
@@ -66,6 +91,6 @@ const styles = StyleSheet.create({
   logText: {
     fontWeight: "bold",
     marginLeft: 10,
-    color: COLORS.main,
+    color: COLORS.blue,
   },
 });
