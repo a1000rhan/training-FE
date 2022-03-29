@@ -22,19 +22,17 @@ import { observer } from "mobx-react";
 
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "./userValidation";
-import Signin from "./Signin";
+import { signinschema } from "./userValidation";
 
 
-const Signup = ({ navigation }) => {
+const Signin = ({ navigation }) => {
   const toast = useToast();
   const { control, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(signinschema)
   });
-  const onSubmit = data => authStore.Signup(data, navigation, toast);
+  const onSubmit = data =>authStore.Signup(data, navigation, toast);
   if (authStore.user) ;
-  
-  console.log("🚀 ~ file: Signup.js ~ line 31 ~ Signup ~ errors", errors)
+  console.log("🚀 ~ file: Signin.js ~ line 31 ~ Signin ~ errors", errors)
 
   
 
@@ -43,7 +41,7 @@ const Signup = ({ navigation }) => {
     
     <Center w="100%">
       <View style={styles.container}>
-        <Heading>Create an Account</Heading>
+        <Heading>Sign In</Heading>
 
         <VStack space={3} mt="5">
         <Controller
@@ -85,7 +83,7 @@ const Signup = ({ navigation }) => {
         name="password"
         />
         {errors.password && <Text>{errors.password.message}</Text>}
-      <Controller
+      {/* <Controller
         control={control}
        
         render={({ field: { onChange, onBlur, value } }) => (
@@ -104,14 +102,14 @@ const Signup = ({ navigation }) => {
         )}
         name="confirmPassword"
         />
-        {errors.confirmPassword && <Text style={{color: "red"}}>{errors.confirmPassword.message }ss</Text>}
+        {errors.confirmPassword && <Text style={{color: "red"}}>{errors.confirmPassword.message }ss</Text>} */}
          
     
           <Button style={styles.btn} onPress={handleSubmit(onSubmit)}>
-            Sign Up
+            Sign in
           </Button>
-          <Button style={styles.btn} onPress={() => navigation.navigate("Signin")}>
-            Already have an Account
+          <Button style={styles.btn} onPress={() => navigation.goBack()}>
+            Back
           </Button>
           <HStack mt="6" justifyContent="center"></HStack>
         </VStack>
@@ -119,7 +117,7 @@ const Signup = ({ navigation }) => {
     </Center>
   );
 };
-export default observer (Signup);
+export default observer (Signin);
 
 const styles = StyleSheet.create({
   container: {

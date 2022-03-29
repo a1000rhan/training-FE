@@ -17,23 +17,31 @@ class AuthStore {
     this.user = decode(token);
   };
 
-  signInUser = async (user, navigation, toast) => {
+  Signin = async (data,navigation,toast) => {
     try {
       const resp = await api.post("/user/signin", user);
 
       this.setUser(resp.data.token);
+      navigation.navigate("Drawer");
       this.loading = false;
       toast.show({
         title: "Sign in Successfully",
         status: "success",
       });
+      courseStore.fetchCourse();
     } catch (error) {
+      toast.show({
+        title: "Sign in Failed",
+        status: "error",
+      });
       console.log(error);
     }
   };
 
-  signUpUser = async (user, navigation, toast) => {
+  Signup = async (data, navigation, toast) => {
     try {
+      const user={staffId:data.staffId, password:data.password}
+      console.log(user)
       const resp = await api.put("/user", user);
       this.setUser(resp.data.token);
       navigation.navigate("Drawer");
