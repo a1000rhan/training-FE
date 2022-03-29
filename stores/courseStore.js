@@ -1,3 +1,4 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { makeAutoObservable } from "mobx";
 import api from "./api";
 
@@ -23,7 +24,13 @@ class CourseStore {
       console.log(tempCourse)
       this.courses =tempCourse
       navigation.navigate("CourseList");
+    }catch(error){
+    console.log("🚀 ~ file: courseStore.js ~ line 28 ~ CourseStore ~ deleteCourse ~ error", error)
+      
+    }
+  }
   createCourse = async (course, navigation) => {
+   
     try {
       const formData = new FormData();
       for (const key in course) formData.append(key, course[key]);
@@ -46,6 +53,18 @@ class CourseStore {
         "🚀 ~ file: courseStore.js ~ line 26 ~ courseStore ~ deleteCourse= ~ error",
         error
       );
+    }
+  };
+  joinCourse = async (course, navigation) => {
+    try {
+      const res = await api.post(`/courses/${course._id}`);
+      const tempArr = this.courses.map((course) =>
+        course._id === res.data._id ? res.data : course
+      );
+      this.courses = tempArr;
+      navigation.navigate("CourseList");
+    } catch (error) {
+      console.log(error);
     }
   };
 }
