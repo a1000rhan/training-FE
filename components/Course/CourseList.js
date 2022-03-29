@@ -54,10 +54,20 @@ const CourseList = ({ navigation }) => {
         <View style={styles.icon}>
           <Icon
             color={"white"}
+            style={styles.ico1}
             name="reorder-three"
             size={30}
             onPress={() => {
               navigation.toggleDrawer();
+            }}
+          />
+          <Icon
+            color={"white"}
+            name="add-circle"
+            style={styles.ico2}
+            size={30}
+            onPress={() => {
+              navigation.navigate("AddCourse");
             }}
           />
           <Image
@@ -95,8 +105,18 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginTop: 50,
-    marginLeft: 15,
+
     zIndex: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    display: "flex",
+    width: "100%",
+  },
+  ico1: {
+    marginLeft: 15,
+  },
+  ico2: {
+    marginRight: 15,
   },
   topImg: {
     width: 200,

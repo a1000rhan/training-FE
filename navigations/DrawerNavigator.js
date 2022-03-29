@@ -6,6 +6,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import CustomDrawerContent from "./CustomDrawerContent";
 import CourseList from "../components/Course/CourseList";
 import UserProfile from "../components/Profile/UserProfile";
+import Requests from "../components/Requests/Requests";
 
 const Drawer = createDrawerNavigator();
 
@@ -19,9 +20,13 @@ const DrawerNavigator = () => {
         name="CourseList"
         component={CourseList}
         options={{
-          drawerIcon: () => {
-            <Icon name="home-outline" size={22} />;
-          },
+          drawerIcon: ({ focused, size }) => (
+            <Icon
+              name="home"
+              size={size}
+              color={focused ? "#173E7A" : "#ccc"}
+            />
+          ),
           drawerActiveBackgroundColor: "#edeff2",
           drawerLabel: "Course List",
           drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
@@ -33,13 +38,20 @@ const DrawerNavigator = () => {
         name="UserProfile"
         component={UserProfile}
         options={{
-          drawerIcon: () => {
-            <Icon name="home-outline" size={22} />;
-          },
           drawerActiveBackgroundColor: "#edeff2",
           drawerLabel: "Profile",
           drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
           headerShown: false,
+          headerTitleStyle: { fontSize: 40, color: "white" },
+        }}
+      />
+      <Drawer.Screen
+        name="Requests"
+        component={Requests}
+        options={{
+          drawerActiveBackgroundColor: "#edeff2",
+          drawerLabel: "Requests",
+          drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
           headerTitleStyle: { fontSize: 40, color: "white" },
         }}
       />

@@ -6,11 +6,12 @@ import CourseDetails from "../components/Course/CourseDetails";
 import DrawerNavigator from "./DrawerNavigator";
 import CourseList from "../components/Course/CourseList";
 import Signup from "../components/AuthUser/Signup";
+import AddCourse from "../components/NewCourse/AddCourse";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Drawer">
       <Stack.Screen
         name="Home"
         options={{ headerShown: false }}
@@ -30,6 +31,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name="Details"
         component={CourseDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddCourse"
+        component={AddCourse}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
