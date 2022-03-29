@@ -73,10 +73,6 @@ class AuthStore {
       const exp = decode(token).exp;
       if (exp > currentTime) {
         this.setUser(token);
-        bookStore.fetchUserBookings();
-        profileStore.profiles.find(
-          (profile) => profile.owner._id === this.user._id
-        );
       } else {
         this.signOut();
       }
