@@ -30,7 +30,7 @@ const Signin = ({ navigation }) => {
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(signinschema)
   });
-  const onSubmit = data =>authStore.Signup(data, navigation, toast);
+  const onSubmit = data =>authStore.Signin(data, navigation, toast);
   if (authStore.user) ;
   console.log("🚀 ~ file: Signin.js ~ line 31 ~ Signin ~ errors", errors)
 

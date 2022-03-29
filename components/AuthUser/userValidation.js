@@ -1,9 +1,9 @@
 import * as yup from "yup";
 
 export const signinschema = yup.object ({
-  staffId:yup.number()
-  .min(2)
-  .required("Please Enter the Correct Staff ID"),
+  // staffId:yup.number()
+  
+  // .required("Please Enter the Correct Staff ID"),
 
   password:yup
   .string()

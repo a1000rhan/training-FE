@@ -19,7 +19,8 @@ class AuthStore {
 
   Signin = async (data,navigation,toast) => {
     try {
-      const resp = await api.post("/user/signin", user);
+      console.log(data)
+      const resp = await api.post("/user/signin", data);
 
       this.setUser(resp.data.token);
       navigation.navigate("Drawer");
