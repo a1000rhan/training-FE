@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import {StyleSheet,View } from "react-native";
+import {StyleSheet,TextInput,View } from "react-native";
 
 import {
   Button,
@@ -20,53 +20,92 @@ import COLORS from "../../color";
 import authStore from "../../stores/AuthStore";
 import { observer } from "mobx-react";
 
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./userValidation";
 
 
 const Signup = ({ navigation }) => {
   const toast = useToast();
-  const [user, setUser] = useState({
-    staffId: "",
-    password: "",
-    confirmPassword:"",
-    
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema)
   });
+  const onSubmit = data => console.log(data);
   
+  console.log("🚀 ~ file: Signup.js ~ line 31 ~ Signup ~ errors", errors)
 
-  const handleSubmit =  () => {
-
-     authStore.signUpUser(user, navigation,toast);
-  
-  };
   
 
   return (
+     
+    
     <Center w="100%">
       <View style={styles.container}>
         <Heading>Create an Account</Heading>
 
         <VStack space={3} mt="5">
+        <Controller
+        control={control}
+     
+        render={({ field: { onChange, onBlur, value } }) => (
+
           <FormControl>
             <FormControl.Label>Staff ID</FormControl.Label>
             <Input
-              onChangeText={(value) => setUser({ ...user, staffId: value })}
-              
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
             />
+          
           </FormControl>
+        )}
+        name="staffId"
+      />
+      {errors.staffId && <Text>{errors.staffId.message }</Text>}
 
+      <Controller
+        control={control}
+       
+        render={({ field: { onChange, onBlur, value } }) => (
           <FormControl>
             <FormControl.Label>Password</FormControl.Label>
             <Input
-              type="password"
-              onChangeText={(value) => setUser({ ...user, password: value })}
+            
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            type="password"
+            
             />
           </FormControl>
-
+        
+        )}
+        name="password"
+        />
+        {errors.password && <Text>{errors.password.message}</Text>}
+      <Controller
+        control={control}
+       
+        render={({ field: { onChange, onBlur, value } }) => (
           <FormControl>
-            <FormControl.Label>Confirm Password</FormControl.Label>
-            <Input type="password" onChangeText={(value) => {}} />
+            <FormControl.Label>confirmPassword</FormControl.Label>
+            <Input
+            
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            type="password"
+            
+            />
           </FormControl>
+        
+        )}
+        name="confirmPassword"
+        />
+        {errors.confirmPassword && <Text style={{color: "red"}}>{errors.confirmPassword.message }ss</Text>}
+         
     
-          <Button style={styles.btn} onPress={handleSubmit}>
+          <Button style={styles.btn} onPress={handleSubmit(onSubmit)}>
             Sign Up
           </Button>
           <Button style={styles.btn} onPress={() => navigation.goBack()}>
