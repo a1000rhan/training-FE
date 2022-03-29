@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import {StyleSheet,TextInput,View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 
 import {
   Button,
@@ -12,7 +12,6 @@ import {
   VStack,
   useToast,
   Text,
-  
 } from "native-base";
 
 import COLORS from "../../color";
@@ -25,92 +24,80 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./userValidation";
 import Signin from "./Signin";
 
-
 const Signup = ({ navigation }) => {
   const toast = useToast();
-  const { control, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
   });
-  const onSubmit = data => authStore.Signup(data, navigation, toast);
-  if (authStore.user) ;
-  
-  console.log("🚀 ~ file: Signup.js ~ line 31 ~ Signup ~ errors", errors)
-
-  
+  const onSubmit = (data) => authStore.Signup(data, navigation, toast);
+  if (authStore.user);
 
   return (
-     
-    
     <Center w="100%">
       <View style={styles.container}>
         <Heading>Create an Account</Heading>
 
         <VStack space={3} mt="5">
-        <Controller
-        control={control}
-     
-        render={({ field: { onChange, onBlur, value } }) => (
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <FormControl>
+                <FormControl.Label>Staff ID</FormControl.Label>
+                <Input onBlur={onBlur} onChangeText={onChange} value={value} />
+              </FormControl>
+            )}
+            name="staffId"
+          />
+          {errors.staffId && <Text>{errors.staffId.message}</Text>}
 
-          <FormControl>
-            <FormControl.Label>Staff ID</FormControl.Label>
-            <Input
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          
-          </FormControl>
-        )}
-        name="staffId"
-      />
-      {errors.staffId && <Text>{errors.staffId.message }</Text>}
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <FormControl>
+                <FormControl.Label>Password</FormControl.Label>
+                <Input
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  type="password"
+                />
+              </FormControl>
+            )}
+            name="password"
+          />
+          {errors.password && <Text>{errors.password.message}</Text>}
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <FormControl>
+                <FormControl.Label>confirmPassword</FormControl.Label>
+                <Input
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  type="password"
+                />
+              </FormControl>
+            )}
+            name="confirmPassword"
+          />
+          {errors.confirmPassword && (
+            <Text style={{ color: "red" }}>
+              {errors.confirmPassword.message}ss
+            </Text>
+          )}
 
-      <Controller
-        control={control}
-       
-        render={({ field: { onChange, onBlur, value } }) => (
-          <FormControl>
-            <FormControl.Label>Password</FormControl.Label>
-            <Input
-            
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            type="password"
-            
-            />
-          </FormControl>
-        
-        )}
-        name="password"
-        />
-        {errors.password && <Text>{errors.password.message}</Text>}
-      <Controller
-        control={control}
-       
-        render={({ field: { onChange, onBlur, value } }) => (
-          <FormControl>
-            <FormControl.Label>confirmPassword</FormControl.Label>
-            <Input
-            
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            type="password"
-            
-            />
-          </FormControl>
-        
-        )}
-        name="confirmPassword"
-        />
-        {errors.confirmPassword && <Text style={{color: "red"}}>{errors.confirmPassword.message }ss</Text>}
-         
-    
           <Button style={styles.btn} onPress={handleSubmit(onSubmit)}>
             Sign Up
           </Button>
-          <Button style={styles.btn} onPress={() => navigation.navigate("Signin")}>
+          <Button
+            style={styles.btn}
+            onPress={() => navigation.navigate("Signin")}
+          >
             Already have an Account
           </Button>
           <HStack mt="6" justifyContent="center"></HStack>
@@ -119,7 +106,7 @@ const Signup = ({ navigation }) => {
     </Center>
   );
 };
-export default observer (Signup);
+export default observer(Signup);
 
 const styles = StyleSheet.create({
   container: {
@@ -128,7 +115,7 @@ const styles = StyleSheet.create({
     height: "95%",
     display: "flex",
     justifyContent: "center",
-    alignSelf:"center",
+    alignSelf: "center",
     backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {
@@ -160,8 +147,8 @@ const styles = StyleSheet.create({
   label: {
     margin: 8,
   },
-  tac:{
-    alignSelf:"center",
-    fontSize:10
-  }
+  tac: {
+    alignSelf: "center",
+    fontSize: 10,
+  },
 });
