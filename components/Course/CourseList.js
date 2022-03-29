@@ -26,7 +26,7 @@ const CourseList = ({ navigation }) => {
     <Text>is loading</Text>;
   }
 
-  const courseArr = courseStore.course
+  const courseArr = courseStore.courses
     .filter((course) =>
       course.title.toLowerCase().includes(query.toLowerCase())
     )
