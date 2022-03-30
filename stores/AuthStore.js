@@ -3,6 +3,7 @@ import decode from "jwt-decode";
 import api from "./api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import courseStore from "./courseStore";
+import {Box } from "native-base";
 
 class AuthStore {
   user = null;
