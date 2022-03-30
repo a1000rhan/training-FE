@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     width: "80%",
-    height: "95%",
+    height: "85%",
     display: "flex",
     justifyContent: "center",
     alignSelf: "center",

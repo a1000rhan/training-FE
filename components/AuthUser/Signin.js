@@ -151,14 +151,14 @@ const Signin = ({ navigation }) => {
             <Button style={styles.signbtn} onPress={handleSubmit(onSubmit)}>
               Sign in
             </Button>
-
-            <Icon
-              name="scan"
-              color={"white"}
-              size={40}
-              style={styles.scanbtn}
-              onPress={hundleBiometricAuth}
-            />
+            <View style={styles.scanbtn}>
+              <Icon
+                name="scan"
+                color={"white"}
+                size={40}
+                onPress={hundleBiometricAuth}
+              />
+            </View>
           </View>
           <Button style={styles.btn} onPress={() => navigation.goBack()}>
             Back
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     width: "80%",
-    height: "95%",
+    height: "85%",
     display: "flex",
     justifyContent: "center",
     alignSelf: "center",
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   rowbtns: { flexDirection: "row" },
   signbtn: {
     height: 50,
-    width: "75%",
+    flex: 1,
     backgroundColor: COLORS.blue,
     marginTop: 20,
     borderRadius: 7,
@@ -215,9 +215,10 @@ const styles = StyleSheet.create({
     width: "20%",
     backgroundColor: COLORS.blue,
     marginTop: 20,
-    borderRadius: 7,
-    paddingTop: 3,
-    paddingLeft: 8,
+
+    marginLeft: 4,
+
+    borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
   },
