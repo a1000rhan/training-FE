@@ -15,14 +15,14 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Signup"
-        options={{ headerShown: false }}
-        component={Signup}
-      />
-      <Stack.Screen
         name="Home"
         options={{ headerShown: false }}
         component={Home}
+      />
+      <Stack.Screen
+        name="Signup"
+        options={{ headerShown: false }}
+        component={Signup}
       />
       <Stack.Screen
         name="Signin"

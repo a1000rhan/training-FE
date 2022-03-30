@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/Ionicons";
+import Icon2 from "react-native-vector-icons/AntDesign";
 
 import CustomDrawerContent from "./CustomDrawerContent";
 import CourseList from "../components/Course/CourseList";
@@ -21,11 +22,7 @@ const DrawerNavigator = () => {
         component={CourseList}
         options={{
           drawerIcon: ({ focused, size }) => (
-            <Icon
-              name="home"
-              size={size}
-              color={focused ? "#173E7A" : "#ccc"}
-            />
+            <Icon name="home" size={size} color={"#173E7A"} />
           ),
           drawerActiveBackgroundColor: "#edeff2",
           drawerLabel: "Course List",
@@ -38,6 +35,9 @@ const DrawerNavigator = () => {
         name="UserProfile"
         component={UserProfile}
         options={{
+          drawerIcon: ({ size }) => (
+            <Icon2 name="profile" size={size} color={"#173E7A"} />
+          ),
           drawerActiveBackgroundColor: "#edeff2",
           drawerLabel: "Profile",
           drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
@@ -49,6 +49,9 @@ const DrawerNavigator = () => {
         name="Requests"
         component={Requests}
         options={{
+          drawerIcon: ({ size }) => (
+            <Icon name="git-pull-request" size={size} color={"#173E7A"} />
+          ),
           drawerActiveBackgroundColor: "#edeff2",
           drawerLabel: "Requests",
           drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },

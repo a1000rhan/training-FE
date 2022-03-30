@@ -17,7 +17,7 @@ const Categories = ({ route, navigation }) => {
     location: inComing.location,
     maxSeats: 20,
     image: "",
-    skills: "",
+    skills: [],
   });
   const [uploadedImage, setUploadedImage] = useState(null);
 
