@@ -1,3 +1,4 @@
+import { observer } from "mobx-react";
 import React from "react";
 import {
   StyleSheet,
@@ -11,21 +12,29 @@ import {
 import { Avatar } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import authStore from "../../stores/AuthStore";
+import Loading from "../Loading";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const UserProfile = ({ navigation }) => {
+  if (authStore.user.type === "student" && !authStore.profile) {
+    authStore.fetchUserProfile();
+  }
+  if (authStore.profileLoading) {
+    return <Loading />;
+  }
+  // const courses= authStore.profile.courses?.map((course)=><Text>course.</Text>))
   return (
     <>
       <View style={styles.header}>
         <View style={styles.icon}>
           <Icon
             color={"white"}
-            name="reorder-three"
+            name="arrow-back-circle-sharp"
             size={30}
             onPress={() => {
-              navigation.toggleDrawer();
+              navigation.goBack();
             }}
           />
         </View>
@@ -54,11 +63,11 @@ const UserProfile = ({ navigation }) => {
         <ScrollView>
           <View style={styles.card}>
             <Text style={styles.subTitle}>First Name:</Text>
-            <Text style={styles.txt}></Text>
+            <Text style={styles.txt}>{authStore.profile.firstName}</Text>
           </View>
           <View style={styles.card}>
             <Text style={styles.subTitle}>Last Name:</Text>
-            <Text style={styles.txt}></Text>
+            <Text style={styles.txt}>{authStore.profile.lastName}</Text>
           </View>
           <View style={styles.card}>
             <Text style={styles.subTitle}>Courses:</Text>
@@ -70,7 +79,7 @@ const UserProfile = ({ navigation }) => {
   );
 };
 
-export default UserProfile;
+export default observer(UserProfile);
 
 const styles = StyleSheet.create({
   header: {
