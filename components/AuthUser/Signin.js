@@ -153,7 +153,7 @@ const Signin = ({ navigation }) => {
             </Button>
             <View style={styles.scanbtn}>
               <Icon
-                name="scan"
+                name="finger-print"
                 color={"white"}
                 size={40}
                 onPress={hundleBiometricAuth}
