@@ -61,15 +61,17 @@ const CourseList = ({ navigation }) => {
               navigation.toggleDrawer();
             }}
           />
-          <Icon
-            color={"white"}
-            name="add-circle"
-            style={styles.ico2}
-            size={30}
-            onPress={() => {
-              navigation.navigate("AddCourse");
-            }}
-          />
+          {authStore.user?.type == "admin" && (
+            <Icon
+              color={"white"}
+              name="add-circle"
+              style={styles.ico2}
+              size={30}
+              onPress={() => {
+                navigation.navigate("AddCourse");
+              }}
+            />
+          )}
           <Image
             style={styles.topImg}
             source={require("../../assets/Lesson.png")}

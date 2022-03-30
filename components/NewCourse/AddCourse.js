@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+  PlatformColor,
+} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -14,39 +21,43 @@ const AddCourse = ({ navigation }) => {
     image: "",
     location: "",
   });
-  const [isPickerShow, setIsPickerShow] = useState(false);
+  const [isDateShow, setIsDateShow] = useState(false);
+  const [isTimeShow, setIsTimeShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date(Date.now()));
   const [endDate, setEndDate] = useState(new Date(Date.now()));
   const [startTime, setStartTime] = useState(new Date(Date.now()));
   const [endTime, setEndTime] = useState(new Date(Date.now()));
 
-  const showPicker = () => {
-    setIsPickerShow(true);
+  const showDate = () => {
+    setIsDateShow(true);
+  };
+  const showTime = () => {
+    setIsTimeShow(true);
   };
 
   const onChangeStartDate = (event, value) => {
     setStartDate(value);
     if (Platform.OS === "android") {
-      setIsPickerShow(false);
+      setIsDateShow(false);
     }
   };
   const onChangeEndDate = (event, value) => {
     setEndDate(value);
     if (Platform.OS === "android") {
-      setIsPickerShow(false);
+      setIsDateShow(false);
     }
   };
   const onChangeStartTime = (event, value) => {
     setStartTime(value);
     if (Platform.OS === "android") {
-      setIsPickerShow(false);
+      setIsDateShow(false);
     }
   };
   const onChangeEndTime = (event, value) => {
     setEndTime(value);
 
     if (Platform.OS === "android") {
-      setIsPickerShow(false);
+      setIsDateShow(false);
     }
   };
   const handleSubmit = () => {
@@ -104,16 +115,14 @@ const AddCourse = ({ navigation }) => {
           <Text style={styles.label}>Time & Date</Text>
           <Text style={styles.smlabel}>Date</Text>
           <View style={styles.date}>
-            {!isPickerShow && (
+            {!isDateShow && (
               <View style={styles.btnContainer}>
-                <Button
-                  title="Show Picker"
-                  color="white"
-                  onPress={showPicker}
-                />
+                <Button color="black" onPress={showDate}>
+                  Choose the Date
+                </Button>
               </View>
             )}
-            {isPickerShow && (
+            {isDateShow && (
               <>
                 <DateTimePicker
                   value={startDate}
@@ -136,7 +145,14 @@ const AddCourse = ({ navigation }) => {
           </View>
           <Text style={styles.smlabel}>Time</Text>
           <View style={styles.date}>
-            {isPickerShow && (
+            {!isTimeShow && (
+              <View style={styles.btnContainer}>
+                <Button color="black" onPress={showTime}>
+                  choose the Time
+                </Button>
+              </View>
+            )}
+            {isTimeShow && (
               <>
                 <DateTimePicker
                   value={startTime}

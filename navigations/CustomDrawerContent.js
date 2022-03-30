@@ -4,13 +4,12 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { StyleSheet, Text, View,Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import LogoutIcon from "react-native-vector-icons/MaterialIcons";
 import { Avatar } from "react-native-paper";
 import COLORS from "../color";
 import authStore from "../stores/AuthStore";
 import { observer } from "mobx-react";
-
 
 // import { observer } from "mobx-react";
 
@@ -20,15 +19,14 @@ function CustomDrawerContent(props) {
   const checkUser = () => {
     if (authStore.user) {
       return authStore.user.staffId;
-    } 
-    
+    }
   };
   const checkForLogout = () => {
     if (authStore.user) {
       return (
         <Pressable
           style={styles.logout}
-          onPress={() => authStore.signOut()}
+          onPress={() => authStore.signOut(props)}
         >
           <LogoutIcon size={22} color={COLORS.blue} name="logout" />
           <Text style={styles.logText}>Logout</Text>
@@ -62,8 +60,8 @@ function CustomDrawerContent(props) {
       <DrawerItemList {...props} />
       {checkForLogout()}
     </DrawerContentScrollView>
-      
-  ); }
+  );
+}
 
 export default observer(CustomDrawerContent);
 
@@ -90,7 +88,7 @@ const styles = StyleSheet.create({
   ],
   logText: {
     fontWeight: "bold",
-    marginLeft: 10,
+    marginLeft: 35,
     color: COLORS.blue,
   },
 });

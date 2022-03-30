@@ -1,15 +1,17 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import Icon2 from "react-native-vector-icons/Ionicons";
+import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import { Chip } from "react-native-paper";
 import { observer } from "mobx-react";
 import COLORS from "../../color";
 import courseStore from "../../stores/courseStore";
 import authStore from "../../stores/AuthStore";
 import { Button } from "native-base";
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
+
 const CourseDetails = ({ route, navigation }) => {
   const course = route.params.course;
 
@@ -58,6 +60,11 @@ const CourseDetails = ({ route, navigation }) => {
         <View style={styles.card}>
           <Text style={styles.subTitle}>Description</Text>
           <Text style={styles.txt}>{course.description}</Text>
+        </View>
+        <View style={styles.card}>
+          <Text style={styles.subTitle}>Time</Text>
+          <Text style={styles.txt}>Time: {course.time}</Text>
+          <Text style={styles.txt}>Date: {course.date}</Text>
         </View>
         <View style={styles.card}>
           <Text style={styles.subTitle}>Skills</Text>
@@ -122,19 +129,14 @@ const styles = StyleSheet.create({
   titleContainer: {
     display: "flex",
     flexDirection: "row",
-    marginTop: windowHeight / 9,
-    justifyContent: "center",
-    alignItems: "center",
+    marginTop: windowHeight / 7,
+    marginLeft: windowHeight / 20,
+    position: "absolute",
   },
   Title: {
     fontSize: 50,
-
-    alignSelf: "center",
     color: "white",
-
     fontWeight: "bold",
-    marginLeft: windowWidth / 3.5,
-    position: "absolute",
   },
   btn: {
     height: 50,

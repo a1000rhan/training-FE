@@ -17,9 +17,9 @@ class AuthStore {
     this.user = decode(token);
   };
 
-  Signin = async (data,navigation,toast) => {
+  Signin = async (data, navigation, toast) => {
     try {
-      console.log(data)
+      console.log(data);
       const resp = await api.post("/user/signin", data);
 
       this.setUser(resp.data.token);
@@ -41,8 +41,8 @@ class AuthStore {
 
   Signup = async (data, navigation, toast) => {
     try {
-      const user={staffId:data.staffId, password:data.password}
-      console.log(user)
+      const user = { staffId: data.staffId, password: data.password };
+      console.log(user);
       const resp = await api.put("/user", user);
       this.setUser(resp.data.token);
       navigation.navigate("Drawer");
@@ -60,10 +60,11 @@ class AuthStore {
       console.log(error);
     }
   };
-  signOut = async () => {
+  signOut = async (props) => {
     delete api.defaults.headers.common.Authorization;
     this.user = null;
     await AsyncStorage.removeItem("myToken");
+    props.navigation.navigate("Home");
   };
 
   checkForToken = async () => {

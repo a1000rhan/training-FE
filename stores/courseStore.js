@@ -20,20 +20,35 @@ class CourseStore {
   deleteCourse = async (courseId, navigation) => {
     try {
       await api.delete(`/courses/${courseId}`);
-      const tempCourse= this.courses.filter((course) => course._id !== courseId);
-      console.log(tempCourse)
-      this.courses =tempCourse
+      const tempCourse = this.courses.filter(
+        (course) => course._id !== courseId
+      );
+      console.log(tempCourse);
+      this.courses = tempCourse;
       navigation.navigate("CourseList");
-    }catch(error){
-    console.log("🚀 ~ file: courseStore.js ~ line 28 ~ CourseStore ~ deleteCourse ~ error", error)
-      
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: courseStore.js ~ line 28 ~ CourseStore ~ deleteCourse ~ error",
+        error
+      );
     }
-  }
+  };
   createCourse = async (course, navigation) => {
-   
     try {
       const formData = new FormData();
-      for (const key in course) formData.append(key, course[key]);
+
+      formData.append("title", course.title);
+      formData.append("description", course.description);
+      formData.append("time", course.time);
+      formData.append("date", course.date);
+      formData.append("location", course.location);
+      formData.append("maxSeats", course.maxSeats);
+      formData.append("image", course.image);
+      course.skills.map((skill) => formData.append("skills", skill));
+      console.log(
+        "🚀 ~ file: courseStore.js ~ line 47 ~ CourseStore ~ createCourse= ~ formData",
+        formData
+      );
 
       const res = await api({
         method: "POST",
