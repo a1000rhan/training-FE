@@ -104,6 +104,15 @@ const AddCourse = ({ navigation }) => {
           <Text style={styles.label}>Time & Date</Text>
           <Text style={styles.smlabel}>Date</Text>
           <View style={styles.date}>
+            {!isPickerShow && (
+              <View style={styles.btnContainer}>
+                <Button
+                  title="Show Picker"
+                  color="white"
+                  onPress={showPicker}
+                />
+              </View>
+            )}
             {isPickerShow && (
               <>
                 <DateTimePicker
@@ -114,37 +123,37 @@ const AddCourse = ({ navigation }) => {
                   onChange={onChangeStartDate}
                   style={styles.datePicker}
                 />
+
+                <DateTimePicker
+                  value={endDate}
+                  mode={"date"}
+                  display={Platform.OS === "ios" ? "" : "default"}
+                  onChange={onChangeEndDate}
+                  style={styles.datePicker}
+                />
               </>
-            )}
-            {isPickerShow && (
-              <DateTimePicker
-                value={endDate}
-                mode={"date"}
-                display={Platform.OS === "ios" ? "" : "default"}
-                onChange={onChangeEndDate}
-                style={styles.datePicker}
-              />
             )}
           </View>
           <Text style={styles.smlabel}>Time</Text>
           <View style={styles.date}>
             {isPickerShow && (
-              <DateTimePicker
-                value={startTime}
-                mode={"time"}
-                display={Platform.OS === "ios" ? "" : "default"}
-                onChange={onChangeStartTime}
-                style={styles.datePicker}
-              />
-            )}
-            {isPickerShow && (
-              <DateTimePicker
-                value={endTime}
-                mode={"time"}
-                display={Platform.OS === "ios" ? "" : "default"}
-                onChange={onChangeEndTime}
-                style={styles.datePicker}
-              />
+              <>
+                <DateTimePicker
+                  value={startTime}
+                  mode={"time"}
+                  display={Platform.OS === "ios" ? "" : "default"}
+                  onChange={onChangeStartTime}
+                  style={styles.datePicker}
+                />
+
+                <DateTimePicker
+                  value={endTime}
+                  mode={"time"}
+                  display={Platform.OS === "ios" ? "" : "default"}
+                  onChange={onChangeEndTime}
+                  style={styles.datePicker}
+                />
+              </>
             )}
           </View>
         </View>
@@ -211,9 +220,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
-  btnContainer: {
-    padding: 30,
-  },
+  btnContainer: {},
   // This only works on iOS
   datePicker: {
     display: "flex",

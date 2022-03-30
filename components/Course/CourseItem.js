@@ -11,6 +11,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { Button } from "react-native-paper";
 import { Avatar } from "native-base";
 import courseStore from "../../stores/courseStore";
+import { baseURL } from "../../stores/api";
 
 const CourseItem = ({ course, navigation }) => {
   return (
