@@ -12,6 +12,7 @@ class CourseStore {
     try {
       const res = await api.get("/courses");
       this.courses = res.data;
+
       this.loading = false;
     } catch (error) {
       console.log(error);
@@ -23,7 +24,6 @@ class CourseStore {
       const tempCourse = this.courses.filter(
         (course) => course._id !== courseId
       );
-      console.log(tempCourse);
       this.courses = tempCourse;
       navigation.navigate("CourseList");
     } catch (error) {

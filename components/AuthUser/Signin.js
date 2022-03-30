@@ -25,6 +25,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { signinschema } from "./userValidation";
 import TouchID from "react-native-touch-id";
 import * as LocalAuthentication from "expo-local-authentication";
+import courseStore from "../../stores/courseStore";
+import Loading from "../Loading";
 
 const Signin = ({ navigation }) => {
   const [isBiometricSupported, setIsBiometricSupported] = useState(false);
@@ -37,9 +39,6 @@ const Signin = ({ navigation }) => {
   } = useForm({
     resolver: yupResolver(signinschema),
   });
-  const onSubmit = (data) => authStore.Signin(data, navigation, toast);
-  if (authStore.user);
-  console.log("🚀 ~ file: Signin.js ~ line 31 ~ Signin ~ errors", errors);
 
   useEffect(() => {
     (async () => {
@@ -92,7 +91,11 @@ const Signin = ({ navigation }) => {
       onSubmit;
     }
   };
-
+  const onSubmit = (data) => authStore.Signin(data, navigation, toast);
+  // if (authStore.user);
+  const handNavigation = () => {
+    navigation.goBack();
+  };
   return (
     <Center w="100%">
       <View style={styles.container}>
@@ -160,7 +163,7 @@ const Signin = ({ navigation }) => {
               />
             </View>
           </View>
-          <Button style={styles.btn} onPress={() => navigation.goBack()}>
+          <Button style={styles.btn} onPress={(onPress = { handNavigation })}>
             Back
           </Button>
           <HStack mt="6" justifyContent="center"></HStack>
