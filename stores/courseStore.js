@@ -12,6 +12,7 @@ class CourseStore {
     try {
       const res = await api.get("/courses");
       this.courses = res.data;
+
       this.loading = false;
     } catch (error) {
       console.log(error);
@@ -20,17 +21,19 @@ class CourseStore {
   deleteCourse = async (courseId, navigation) => {
     try {
       await api.delete(`/courses/${courseId}`);
-      const tempCourse= this.courses.filter((course) => course._id !== courseId);
-      console.log(tempCourse)
-      this.courses =tempCourse
+      const tempCourse = this.courses.filter(
+        (course) => course._id !== courseId
+      );
+      this.courses = tempCourse;
       navigation.navigate("CourseList");
-    }catch(error){
-    console.log("🚀 ~ file: courseStore.js ~ line 28 ~ CourseStore ~ deleteCourse ~ error", error)
-      
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: courseStore.js ~ line 28 ~ CourseStore ~ deleteCourse ~ error",
+        error
+      );
     }
-  }
+  };
   createCourse = async (course, navigation) => {
-   
     try {
       const formData = new FormData();
       for (const key in course) formData.append(key, course[key]);

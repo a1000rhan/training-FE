@@ -53,6 +53,7 @@ const DrawerNavigator = () => {
           drawerLabel: "Requests",
           drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
           headerTitleStyle: { fontSize: 40, color: "white" },
+          headerShown: false,
         }}
       />
     </Drawer.Navigator>

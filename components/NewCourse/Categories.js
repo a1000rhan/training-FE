@@ -114,7 +114,7 @@ const Categories = ({ route, navigation }) => {
           />
           <View style={styles.plus}>
             <Icon.Button
-              onPress={addNewSkill}
+              onPress={() => addNewSkill}
               backgroundColor={"#173E7A"}
               size={20}
               name="add"

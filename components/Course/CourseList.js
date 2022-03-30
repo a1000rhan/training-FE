@@ -7,11 +7,9 @@ import {
   ScrollView,
   Dimensions,
   Image,
-  ImageBackground,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Input } from "native-base";
-import data from "../../data";
 import CourseItem from "./CourseItem";
 import courseStore from "../../stores/courseStore";
 import authStore from "../../stores/AuthStore";
@@ -19,12 +17,12 @@ import authStore from "../../stores/AuthStore";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import { observer } from "mobx-react";
+import Loading from "../Loading";
 
 const CourseList = ({ navigation }) => {
+  // if (authStore.loading) return <Loading />;
+
   const [query, setQuery] = useState("");
-  if (courseStore.loading && authStore.loading) {
-    <Text>is loading</Text>;
-  }
 
   const courseArr = courseStore.courses
     .filter((course) =>

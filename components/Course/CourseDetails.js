@@ -8,13 +8,14 @@ import COLORS from "../../color";
 import courseStore from "../../stores/courseStore";
 import authStore from "../../stores/AuthStore";
 import { Button } from "native-base";
+import Loading from "../Loading";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const CourseDetails = ({ route, navigation }) => {
   const course = route.params.course;
 
   if (courseStore.loading) {
-    <Text>loading</Text>;
+    <Loading />;
   }
   const skillsArr = course.skills?.map((skill, index) => (
     <Chip key={index} style={styles.skl}>
@@ -36,9 +37,7 @@ const CourseDetails = ({ route, navigation }) => {
             name="arrow-back-circle-sharp"
             style={{ marginLeft: 15 }}
             size={35}
-            onPress={() => {
-              navigation.navigate("Drawer");
-            }}
+            onPress={() => navigation.navigate("Drawer")}
           />
           {authStore.user?._id === course.owner._id && (
             <Icon2
@@ -46,7 +45,7 @@ const CourseDetails = ({ route, navigation }) => {
               style={{ marginRight: 15 }}
               name="delete"
               size={30}
-              onPress={handleRemove}
+              onPress={() => handleRemove}
             />
           )}
         </View>
