@@ -1,7 +1,23 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import authStore from "../../stores/AuthStore";
+import Loading from "../Loading";
 const Requests = ({ navigation }) => {
+  if (authStore.user?.type === "admin" && !authStore.profile) {
+    authStore.fetchAllProfiles();
+  }
+  if (authStore.profileLoading) {
+    return <Loading />;
+  }
+  const requests = authStore.profile.map((profile) =>
+    profile.courses.map((course) => (
+      <View>
+        <Text>{course.profileStatus}</Text>
+      </View>
+    ))
+  );
+
   return (
     <>
       <View style={styles.header}>
@@ -17,6 +33,7 @@ const Requests = ({ navigation }) => {
           />
         </View>
       </View>
+      {requests}
     </>
   );
 };

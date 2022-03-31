@@ -52,10 +52,6 @@ class AuthStore {
       this.setUser(resp.data.token);
       courseStore.fetchCourse();
       navigation.navigate("Drawer");
-      // toast.show({
-      //   title: "Sign in Successfully",
-      //   status: "success",
-      // });
     } catch (error) {
       toast.show({
         title: "Sign in Failed",
@@ -87,6 +83,7 @@ class AuthStore {
   signOut = async (props) => {
     delete api.defaults.headers.common.Authorization;
     this.user = null;
+    this.profile = null;
     await AsyncStorage.removeItem("myToken");
     props.navigation.navigate("Home");
   };
