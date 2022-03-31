@@ -84,10 +84,11 @@ class AuthStore {
       console.log(error);
     }
   };
-  signOut = async () => {
+  signOut = async (props) => {
     delete api.defaults.headers.common.Authorization;
     this.user = null;
     await AsyncStorage.removeItem("myToken");
+    props.navigation.navigate("Home");
   };
 
   checkForToken = async () => {
