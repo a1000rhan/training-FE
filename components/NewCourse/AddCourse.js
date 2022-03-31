@@ -103,7 +103,8 @@ const AddCourse = ({ navigation }) => {
         <View style={styles.comp}>
           <Text style={styles.label}>Description:</Text>
           <TextInput
-            style={styles.input}
+            style={styles.textField}
+            multiline={true}
             placeholder={"Enter Course Description"}
             onChangeText={(value) =>
               setCourse({ ...course, description: value })
@@ -222,6 +223,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#173E7A",
     height: 50,
+    padding: 10,
+    borderRadius: 3,
+  },
+  textField: {
+    borderWidth: 1,
+    borderColor: "#173E7A",
+    height: 80,
     padding: 10,
     borderRadius: 3,
   },

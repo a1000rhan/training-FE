@@ -9,11 +9,17 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 
 import { Button } from "react-native-paper";
-import { Avatar } from "native-base";
+import { Avatar, useToast } from "native-base";
 import courseStore from "../../stores/courseStore";
 import { baseURL } from "../../stores/api";
+import authStore from "../../stores/AuthStore";
 
 const CourseItem = ({ course, navigation }) => {
+  const toast = useToast();
+  const handleRemove = () => {
+    courseStore.deleteCourse(course._id, navigation);
+  };
+
   return (
     <Pressable
       onPress={() => {
@@ -33,15 +39,25 @@ const CourseItem = ({ course, navigation }) => {
           <View style={styles.txt}>
             <Text style={styles.courseTitle}>{course.title}</Text>
           </View>
-
-          <Button
-            style={styles.btn}
-            justifyContent={"center"}
-            color={"white"}
-            onPress={() => courseStore.joinCourse(course)}
-          >
-            <Text style={styles.btnTxt}>Enroll</Text>
-          </Button>
+          {authStore.user?.type === "student" ? (
+            <Button
+              style={styles.btn}
+              justifyContent={"center"}
+              color={"white"}
+              onPress={() => courseStore.joinCourse(course)}
+            >
+              <Text style={styles.btnTxt}>Enroll</Text>
+            </Button>
+          ) : (
+            <Button
+              style={styles.btn2}
+              justifyContent={"center"}
+              color={"white"}
+              onPress={handleRemove}
+            >
+              <Text style={styles.btnTxt}>Delete</Text>
+            </Button>
+          )}
         </ImageBackground>
       </View>
     </Pressable>
@@ -99,6 +115,12 @@ const styles = StyleSheet.create({
     width: 100,
 
     backgroundColor: "#173E7A",
+  },
+  btn2: {
+    height: 45,
+    width: 100,
+
+    backgroundColor: "#B92F1A",
   },
   btnTxt: {
     fontWeight: "bold",
