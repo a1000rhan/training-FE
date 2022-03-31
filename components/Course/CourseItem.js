@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
   },
 
   bgCard: {
-    paddingTop: 200,
-    width: "70%",
+    paddingTop: 250,
+
     opacity: 0.2,
   },
 
