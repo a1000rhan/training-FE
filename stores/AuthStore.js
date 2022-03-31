@@ -51,6 +51,7 @@ class AuthStore {
       const resp = await api.post("/user/signin", data);
       this.setUser(resp.data.token);
       courseStore.fetchCourse();
+      this.loading = false;
       navigation.navigate("Drawer");
     } catch (error) {
       toast.show({
@@ -71,6 +72,7 @@ class AuthStore {
       //   title: "Sign in Successfully",
       //   status: "success",
       // });
+
       courseStore.fetchCourse();
     } catch (error) {
       toast.show({
