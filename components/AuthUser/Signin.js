@@ -110,7 +110,7 @@ const Signin = ({ navigation }) => {
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
-                  marginBottom={10}
+                  marginBottom={5}
                 />
               </FormControl>
             )}
