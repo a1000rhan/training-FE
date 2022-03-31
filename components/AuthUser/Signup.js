@@ -94,12 +94,12 @@ const Signup = ({ navigation }) => {
           <Button style={styles.btn} onPress={handleSubmit(onSubmit)}>
             Sign Up
           </Button>
-          <Button
+          {/* <Button
             style={styles.btn}
             onPress={() => navigation.navigate("Signin")}
           >
             Already have an Account
-          </Button>
+          </Button> */}
           <HStack mt="6" justifyContent="center"></HStack>
         </VStack>
       </View>
