@@ -16,6 +16,7 @@ class AuthStore {
       const res = await api.get("/profiles");
       this.profile = res.data;
       this.profileLoading = false;
+      console.log("hello");
     } catch (error) {
       console.log(error);
     }

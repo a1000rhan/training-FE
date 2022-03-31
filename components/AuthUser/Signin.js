@@ -35,6 +35,7 @@ const Signin = ({ navigation }) => {
     resolver: yupResolver(signinschema),
   });
   const onSubmit = (data) => authStore.Signin(data, navigation, toast);
+  console.log("fixes");
   // if (authStore.user);
   const handNavigation = () => {
     navigation.goBack();
