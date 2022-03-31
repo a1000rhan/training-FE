@@ -91,7 +91,7 @@ const Signin = ({ navigation }) => {
     // if (authStore.user);
   };
   const handleNavigation = () => {
-    navigation.goBack();
+    navigation.navigate("Signup");
   };
   const [showPassword, setShowPassword] = useState(false);
 
@@ -151,9 +151,9 @@ const Signin = ({ navigation }) => {
               onPress={hundleBiometricAuth}
             />
           </View>
-          <Button style={styles.btn} onPress={handleNavigation}>
-            Back
-          </Button>
+          <Text style={styles.text} onPress={handleNavigation}>
+            Sign Up Now!
+          </Text>
           <HStack mt="6" justifyContent="center"></HStack>
         </VStack>
       </View>
@@ -225,4 +225,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 10,
   },
+  text:{
+    height: 50,
+    width: "100%",
+    color:COLORS.blue,
+    marginTop: 20,
+    borderRadius: 7,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf:"center"
+  }
 });
