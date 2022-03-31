@@ -22,7 +22,7 @@ const DrawerNavigator = () => {
         component={CourseList}
         options={{
           drawerIcon: ({ focused, size }) => (
-            <Icon name="home" size={size} color={"#173E7A"} />
+            <Icon name="home-outline" size={size} color={"#173E7A"} />
           ),
           drawerActiveBackgroundColor: "#edeff2",
           drawerLabel: "Course List",
@@ -50,7 +50,7 @@ const DrawerNavigator = () => {
         component={Requests}
         options={{
           drawerIcon: ({ size }) => (
-            <Icon name="git-pull-request" size={size} color={"#173E7A"} />
+            <Icon2 name="solution1" size={size} color={"#173E7A"} />
           ),
           drawerActiveBackgroundColor: "#edeff2",
           drawerLabel: "Requests",

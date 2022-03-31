@@ -68,7 +68,7 @@ const Categories = ({ route, navigation }) => {
     setSkills("");
   };
   const SkillsList = newSkills.map((skill, index) => (
-    <Chip key={index} style={styles.chip}>
+    <Chip key={index} style={styles.chip} onPress={() => {}}>
       <Text style={styles.chipText}>{skill}</Text>
     </Chip>
   ));
@@ -112,11 +112,13 @@ const Categories = ({ route, navigation }) => {
             placeholder={"Enter Course Title"}
             onChangeText={handelChangeSkill}
           />
+
           <View style={styles.plus}>
-            <Icon.Button
-              onPress={() => addNewSkill}
+            <Icon
+              onPress={addNewSkill}
               backgroundColor={"#173E7A"}
-              size={20}
+              size={30}
+              color={"white"}
               name="add"
             />
           </View>
@@ -223,5 +225,10 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   chipText: { color: "white", fontWeight: "bold" },
-  plus: { marginTop: 4, width: 40, alignSelf: "flex-end" },
+  plus: {
+    marginTop: 5,
+    borderRadius: 20,
+    alignSelf: "flex-end",
+    backgroundColor: "#173E7A",
+  },
 });

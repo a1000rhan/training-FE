@@ -112,8 +112,9 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     width: "80%",
-    height: "85%",
+    height: "80%",
     display: "flex",
+    marginTop: 60,
     justifyContent: "center",
     alignSelf: "center",
     backgroundColor: "white",

@@ -21,8 +21,8 @@ const AddCourse = ({ navigation }) => {
     image: "",
     location: "",
   });
-  const [isDateShow, setIsDateShow] = useState(false);
-  const [isTimeShow, setIsTimeShow] = useState(false);
+  const [isDateShow, setIsDateShow] = useState(true);
+  const [isTimeShow, setIsTimeShow] = useState(true);
   const [startDate, setStartDate] = useState(new Date(Date.now()));
   const [endDate, setEndDate] = useState(new Date(Date.now()));
   const [startTime, setStartTime] = useState(new Date(Date.now()));

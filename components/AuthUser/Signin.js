@@ -28,7 +28,6 @@ import * as LocalAuthentication from "expo-local-authentication";
 
 const Signin = ({ navigation }) => {
   const [isBiometricSupported, setIsBiometricSupported] = useState(false);
-
   const toast = useToast();
   const {
     control,
@@ -94,6 +93,7 @@ const Signin = ({ navigation }) => {
   const handleNavigation = () => {
     navigation.goBack();
   };
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Center w="100%">
@@ -122,7 +122,15 @@ const Signin = ({ navigation }) => {
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  InputRightElement={
+                    <Icon
+                      size={25}
+                      style={{ marginRight: 10 }}
+                      name={showPassword ? "eye" : "eye-off"}
+                      onPress={() => setShowPassword(!showPassword)}
+                    />
+                  }
                 />
               </FormControl>
             )}
@@ -136,7 +144,7 @@ const Signin = ({ navigation }) => {
             </Button>
 
             <Icon
-              name="scan"
+              name="finger-print"
               color={"white"}
               size={40}
               style={styles.scanbtn}
@@ -158,8 +166,9 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     width: "80%",
-    height: "95%",
+    height: "80%",
     display: "flex",
+    marginTop: 60,
     justifyContent: "center",
     alignSelf: "center",
     backgroundColor: "white",
