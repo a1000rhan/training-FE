@@ -59,6 +59,7 @@ class CourseStore {
           return formData;
         },
       });
+      console.log("hello");
       this.fetchCourse();
       navigation.navigate("Drawer");
       this.course = res.data;

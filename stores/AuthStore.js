@@ -7,29 +7,55 @@ import courseStore from "./courseStore";
 class AuthStore {
   user = null;
   loading = true;
-
+  profileLoading = true;
+  profile = null;
   constructor() {
     makeAutoObservable(this, {});
   }
-  setUser = (token, type) => {
+  fetchUserProfile = async () => {
+    try {
+      const res = await api.get("/profiles");
+      this.profile = res.data;
+      this.profileLoading = false;
+      console.log("hello");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  fetchAllProfiles = async () => {
+    try {
+      const res = await api.get("/profiles/allprofiles");
+      this.profile = res.data;
+      this.profileLoading = false;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  setUser = (token) => {
     AsyncStorage.setItem("myToken", token);
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
+
+    // if (this.user.type === "student" && this.profile) {
+    //   this.fetchUserProfile();
+    //   this.profileLoading = false;
+    // } else if (this.user.type === "admin" && this.profile) {
+    //   this.fetchAllProfiles();
+    //   this.profileLoading = false;
+    // }
   };
 
   Signin = async (data, navigation, toast) => {
     try {
-      console.log(data);
       const resp = await api.post("/user/signin", data);
-
       this.setUser(resp.data.token);
+      courseStore.fetchCourse();
       navigation.navigate("Drawer");
-      this.loading = false;
       toast.show({
         title: "Sign in Successfully",
         status: "success",
       });
-      courseStore.fetchCourse();
     } catch (error) {
       toast.show({
         title: "Sign in Failed",
@@ -42,11 +68,9 @@ class AuthStore {
   Signup = async (data, navigation, toast) => {
     try {
       const user = { staffId: data.staffId, password: data.password };
-      console.log(user);
       const resp = await api.put("/user", user);
       this.setUser(resp.data.token);
       navigation.navigate("Drawer");
-      this.loading = false;
       toast.show({
         title: "Sign in Successfully",
         status: "success",
@@ -60,11 +84,10 @@ class AuthStore {
       console.log(error);
     }
   };
-  signOut = async (props) => {
+  signOut = async () => {
     delete api.defaults.headers.common.Authorization;
     this.user = null;
     await AsyncStorage.removeItem("myToken");
-    props.navigation.navigate("Home");
   };
 
   checkForToken = async () => {
@@ -82,7 +105,6 @@ class AuthStore {
     }
   };
 }
-
 const authStore = new AuthStore();
 authStore.checkForToken();
 export default authStore;

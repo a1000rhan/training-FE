@@ -38,8 +38,6 @@ const Signin = ({ navigation }) => {
     resolver: yupResolver(signinschema),
   });
   const onSubmit = (data) => authStore.Signin(data, navigation, toast);
-  if (authStore.user);
-  console.log("🚀 ~ file: Signin.js ~ line 31 ~ Signin ~ errors", errors);
 
   useEffect(() => {
     (async () => {
@@ -91,6 +89,10 @@ const Signin = ({ navigation }) => {
     if (bimetricAuth) {
       onSubmit;
     }
+    // if (authStore.user);
+  };
+  const handleNavigation = () => {
+    navigation.goBack();
   };
 
   return (
@@ -160,7 +162,7 @@ const Signin = ({ navigation }) => {
               onPress={hundleBiometricAuth}
             />
           </View>
-          <Button style={styles.btn} onPress={() => navigation.goBack()}>
+          <Button style={styles.btn} onPress={handleNavigation}>
             Back
           </Button>
           <HStack mt="6" justifyContent="center"></HStack>
