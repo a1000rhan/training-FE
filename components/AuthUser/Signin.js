@@ -106,7 +106,12 @@ const Signin = ({ navigation }) => {
             render={({ field: { onChange, onBlur, value } }) => (
               <FormControl>
                 <FormControl.Label>Staff ID</FormControl.Label>
-                <Input onBlur={onBlur} onChangeText={onChange} value={value} />
+                <Input
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  marginBottom={10}
+                />
               </FormControl>
             )}
             name="staffId"
@@ -122,6 +127,7 @@ const Signin = ({ navigation }) => {
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
+                  marginBottom={10}
                   type={showPassword ? "text" : "password"}
                   InputRightElement={
                     <Icon
@@ -151,9 +157,11 @@ const Signin = ({ navigation }) => {
               onPress={hundleBiometricAuth}
             />
           </View>
-          <Text style={styles.text} onPress={handleNavigation}>
-            Sign Up Now!
-          </Text>
+          <View style={styles.signUp}>
+            <Text style={styles.text} onPress={handleNavigation}>
+              Sign Up Now!
+            </Text>
+          </View>
           <HStack mt="6" justifyContent="center"></HStack>
         </VStack>
       </View>
@@ -225,14 +233,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 10,
   },
-  text:{
-    height: 50,
-    width: "100%",
-    color:COLORS.blue,
+  signUp: {
+    alignSelf: "center",
     marginTop: 20,
-    borderRadius: 7,
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf:"center"
-  }
+    height: 50,
+  },
+  text: {
+    color: COLORS.blue,
+  },
 });
