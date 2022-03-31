@@ -32,7 +32,7 @@ const CourseDetails = ({ route, navigation }) => {
 
   return (
     <>
-      S
+      
       <View style={styles.header}>
         <View style={styles.icon}>
           <Icon
