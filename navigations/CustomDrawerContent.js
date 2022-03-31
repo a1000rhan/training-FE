@@ -22,7 +22,10 @@ function CustomDrawerContent(props) {
   const checkForLogout = () => {
     if (authStore.user) {
       return (
-        <Pressable style={styles.logout} onPress={() => authStore.signOut()}>
+        <Pressable
+          style={styles.logout}
+          onPress={() => authStore.signOut(props)}
+        >
           <LogoutIcon size={22} color={COLORS.blue} name="logout" />
           <Text style={styles.logText}>Logout</Text>
         </Pressable>
