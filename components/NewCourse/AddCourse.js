@@ -254,10 +254,19 @@ const styles = StyleSheet.create({
     width: 120,
   },
   btn: {
-    marginTop: 10,
+    height: 50,
+    width: "100%",
+
+    alignSelf: "center",
+    marginTop: 20,
+    borderRadius: 7,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#173E7A",
   },
   btnTxt: {
-    color: "white",
+    fontWeight: "bold",
+    color: "#fff",
+    fontSize: 15,
   },
 });
