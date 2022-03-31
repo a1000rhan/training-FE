@@ -18,10 +18,9 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const UserProfile = ({ navigation }) => {
-  if (authStore.user.type === "student" && !authStore.profile) {
+  if (authStore.user?.type === "student" && !authStore.profile) {
     authStore.fetchUserProfile();
   }
-  console.log("HELLO");
   if (authStore.profileLoading) {
     return <Loading />;
   }
