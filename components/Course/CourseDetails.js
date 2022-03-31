@@ -7,7 +7,7 @@ import { observer } from "mobx-react";
 import COLORS from "../../color";
 import courseStore from "../../stores/courseStore";
 import authStore from "../../stores/AuthStore";
-import { Button } from "native-base";
+import { Button, useToast } from "native-base";
 
 import Loading from "../Loading";
 const windowWidth = Dimensions.get("window").width;
@@ -15,6 +15,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const CourseDetails = ({ route, navigation }) => {
   const course = route.params.course;
+  const toast = useToast();
 
   if (courseStore.loading) {
     <Loading />;
@@ -27,12 +28,10 @@ const CourseDetails = ({ route, navigation }) => {
 
   const handleRemove = () => {
     courseStore.deleteCourse(course._id, navigation);
-    navigation.navigate("CourseList");
   };
 
   return (
     <>
-      
       <View style={styles.header}>
         <View style={styles.icon}>
           <Icon
@@ -42,15 +41,6 @@ const CourseDetails = ({ route, navigation }) => {
             size={35}
             onPress={() => navigation.navigate("Drawer")}
           />
-          {authStore.user?._id === course.owner._id && (
-            <Icon2
-              color={"white"}
-              style={{ marginRight: 15 }}
-              name="delete"
-              size={30}
-              onPress={() => handleRemove}
-            />
-          )}
         </View>
         <View style={styles.titleContainer}>
           <Text style={styles.Title}>{course.title}</Text>
@@ -60,31 +50,33 @@ const CourseDetails = ({ route, navigation }) => {
         <View style={styles.card}>
           <Text style={styles.subTitle}>Description</Text>
           <Text style={styles.txt}>{course.description}</Text>
-        </View>
-        <View style={styles.card}>
+
           <Text style={styles.subTitle}>Time</Text>
           <Text style={styles.txt}>Time: {course.time}</Text>
           <Text style={styles.txt}>Date: {course.date}</Text>
-        </View>
-        <View style={styles.card}>
+
           <Text style={styles.subTitle}>Skills</Text>
           <View style={styles.bubbles}>{skillsArr}</View>
-        </View>
-        <View style={styles.card}>
+
           <Text style={styles.subTitle}>Available Seats</Text>
           <Text style={styles.txt}>{course.maxSeats}</Text>
-        </View>
-        <View style={styles.card}>
+
           <Text style={styles.subTitle}>Location</Text>
           <Text style={styles.txt}>{course.location}</Text>
         </View>
         {/* {course.students.some((student) => student === authStore.profile._id)()} */}
-        <Button
-          style={styles.btn}
-          onPress={() => courseStore.joinCourse(course, navigation)}
-        >
-          Enroll
-        </Button>
+        {authStore.user?.type === "student" ? (
+          <Button
+            style={styles.btn}
+            onPress={() => courseStore.joinCourse(course, navigation, toast)}
+          >
+            Enroll
+          </Button>
+        ) : (
+          <Button style={styles.btn2} onPress={handleRemove}>
+            Delete
+          </Button>
+        )}
       </ScrollView>
     </>
   );
@@ -111,11 +103,11 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    width: "95%",
+    width: "85%",
     padding: 10,
     flex: 1,
     shadowColor: "#000",
-    borderRadius: 20,
+    borderRadius: 6,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -123,7 +115,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     backgroundColor: "#fff",
-    margin: 10,
+    marginTop: 10,
+    alignSelf: "center",
     elevation: 8,
   },
   titleContainer: {
@@ -140,12 +133,19 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: 50,
-    width: "100%",
+    width: "85%",
     backgroundColor: COLORS.blue,
     marginTop: 20,
     borderRadius: 7,
-    justifyContent: "center",
-    alignItems: "center",
+    alignSelf: "center",
+  },
+  btn2: {
+    height: 50,
+    width: "85%",
+    backgroundColor: COLORS.red,
+    marginTop: 20,
+    borderRadius: 7,
+    alignSelf: "center",
   },
 
   subTitle: {
@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#4f5156",
     marginBottom: 5,
+    marginTop: 25,
   },
   txt: {
     color: "#4f5156",
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   },
   skl: {
     margin: 10,
-    backgroundColor: "#B92F1A",
+    backgroundColor: COLORS.blue,
   },
   txtSkill: { color: "white", fontWeight: "bold" },
   btn: {

@@ -52,10 +52,10 @@ class AuthStore {
       this.setUser(resp.data.token);
       courseStore.fetchCourse();
       navigation.navigate("Drawer");
-      toast.show({
-        title: "Sign in Successfully",
-        status: "success",
-      });
+      // toast.show({
+      //   title: "Sign in Successfully",
+      //   status: "success",
+      // });
     } catch (error) {
       toast.show({
         title: "Sign in Failed",
@@ -71,10 +71,10 @@ class AuthStore {
       const resp = await api.put("/user", user);
       this.setUser(resp.data.token);
       navigation.navigate("Drawer");
-      toast.show({
-        title: "Sign in Successfully",
-        status: "success",
-      });
+      // toast.show({
+      //   title: "Sign in Successfully",
+      //   status: "success",
+      // });
       courseStore.fetchCourse();
     } catch (error) {
       toast.show({

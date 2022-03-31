@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Button, Chip } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 
 import Icon from "react-native-vector-icons/Ionicons";
 import courseStore from "../../stores/courseStore";
+import { baseURL } from "../../stores/api";
 
 const Categories = ({ route, navigation }) => {
   const inComing = route.params.tempCourse;
@@ -68,7 +76,7 @@ const Categories = ({ route, navigation }) => {
     setSkills("");
   };
   const SkillsList = newSkills.map((skill, index) => (
-    <Chip key={index} style={styles.chip}>
+    <Chip key={index} style={styles.chip} onPress={() => {}}>
       <Text style={styles.chipText}>{skill}</Text>
     </Chip>
   ));
@@ -94,7 +102,8 @@ const Categories = ({ route, navigation }) => {
         </View>
         <Text style={styles.title}>Add New Course</Text>
       </View>
-      <View style={styles.container}>
+
+      <ScrollView style={styles.container}>
         <View style={styles.comp}>
           <Text style={styles.label}>Max Seats</Text>
           <TextInput
@@ -112,24 +121,30 @@ const Categories = ({ route, navigation }) => {
             placeholder={"Enter Course Title"}
             onChangeText={handelChangeSkill}
           />
+
           <View style={styles.plus}>
-            <Icon.Button
-              onPress={() => addNewSkill}
+            <Icon
+              onPress={addNewSkill}
               backgroundColor={"#173E7A"}
-              size={20}
+              size={30}
+              color={"white"}
               name="add"
             />
           </View>
           <View style={styles.checkboxContainer}>{SkillsList}</View>
         </View>
-
+        <Image
+          source={{ uri: uploadedImage }}
+          style={uploadedImage ? styles.uplodImg : ""}
+        />
         <TouchableOpacity style={styles.addBtn} onPress={_pickImage}>
-          <Text style={styles.photoTxtBtn}>Choose a Photo</Text>
+          <Icon name="image" size={30} color={"white"} />
         </TouchableOpacity>
+
         <Button style={styles.btn} onPress={handleSubmit}>
           <Text style={styles.btnTxt}>Add Course</Text>
         </Button>
-      </View>
+      </ScrollView>
     </>
   );
 };
@@ -180,17 +195,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   photoTxtBtn: {
-    alignSelf: "center",
-    margin: 20,
-    backgroundColor: "#B92F1A",
     color: "white",
-    width: "60%",
     height: 50,
-
-    textAlign: "center",
-    justifyContent: "center",
     fontSize: 20,
-    paddingTop: 3,
     fontWeight: "bold",
   },
   checkboxContainer: {
@@ -210,12 +217,29 @@ const styles = StyleSheet.create({
     width: 120,
   },
   btn: {
-    marginTop: 10,
+    height: 50,
+    width: "100%",
+    alignSelf: "center",
+    marginTop: 20,
+    borderRadius: 7,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#173E7A",
-    borderRadius: 5,
+  },
+  addBtn: {
+    alignSelf: "center",
+    marginTop: 20,
+    padding: 10,
+
+    borderRadius: 7,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#B92F1A",
   },
   btnTxt: {
-    color: "white",
+    fontWeight: "bold",
+    color: "#fff",
+    fontSize: 15,
   },
   chip: {
     backgroundColor: "#B92F1A",
@@ -223,5 +247,17 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   chipText: { color: "white", fontWeight: "bold" },
-  plus: { marginTop: 4, width: 40, alignSelf: "flex-end" },
+  plus: {
+    marginTop: 5,
+    borderRadius: 20,
+    alignSelf: "flex-end",
+    backgroundColor: "#173E7A",
+  },
+  uplodImg: {
+    width: 200,
+    height: 150,
+    borderWidth: 1,
+    borderColor: "#173E7A",
+    alignSelf: "center",
+  },
 });

@@ -28,7 +28,6 @@ import * as LocalAuthentication from "expo-local-authentication";
 
 const Signin = ({ navigation }) => {
   const [isBiometricSupported, setIsBiometricSupported] = useState(false);
-
   const toast = useToast();
   const {
     control,
@@ -94,6 +93,7 @@ const Signin = ({ navigation }) => {
   const handleNavigation = () => {
     navigation.navigate("Signup");
   };
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Center w="100%">
@@ -122,40 +122,29 @@ const Signin = ({ navigation }) => {
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  InputRightElement={
+                    <Icon
+                      size={25}
+                      style={{ marginRight: 10 }}
+                      name={showPassword ? "eye" : "eye-off"}
+                      onPress={() => setShowPassword(!showPassword)}
+                    />
+                  }
                 />
               </FormControl>
             )}
             name="password"
           />
           {errors.password && <Text>{errors.password.message}</Text>}
-          {/* <Controller
-        control={control}
-       
-        render={({ field: { onChange, onBlur, value } }) => (
-          <FormControl>
-            <FormControl.Label>confirmPassword</FormControl.Label>
-            <Input
-            
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            type="password"
-            
-            />
-          </FormControl>
-        
-        )}
-        name="confirmPassword"
-        />
-        {errors.confirmPassword && <Text style={{color: "red"}}>{errors.confirmPassword.message }ss</Text>} */}
+
           <View style={styles.rowbtns}>
             <Button style={styles.signbtn} onPress={handleSubmit(onSubmit)}>
               Sign in
             </Button>
 
             <Icon
-              name="scan"
+              name="finger-print"
               color={"white"}
               size={40}
               style={styles.scanbtn}
@@ -177,8 +166,9 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     width: "80%",
-    height: "95%",
+    height: "80%",
     display: "flex",
+    marginTop: 60,
     justifyContent: "center",
     alignSelf: "center",
     backgroundColor: "white",
@@ -208,6 +198,7 @@ const styles = StyleSheet.create({
     width: "75%",
     backgroundColor: COLORS.blue,
     marginTop: 20,
+    marginRight: 2,
     borderRadius: 7,
     justifyContent: "center",
     alignItems: "center",
@@ -217,11 +208,8 @@ const styles = StyleSheet.create({
     width: "20%",
     backgroundColor: COLORS.blue,
     marginTop: 20,
-    borderRadius: 7,
     paddingTop: 3,
     paddingLeft: 8,
-    justifyContent: "center",
-    alignItems: "center",
   },
 
   checkboxContainer: { display: "flex", flexDirection: "row" },

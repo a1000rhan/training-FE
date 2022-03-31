@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   homebtn: {
     width: "75%",
     height: 50,
-    backgroundColor: "#B92F1A",
+    backgroundColor: "#173E7A",
     borderRadius: 10,
   },
   btnText: {

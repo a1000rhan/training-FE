@@ -21,8 +21,8 @@ const AddCourse = ({ navigation }) => {
     image: "",
     location: "",
   });
-  const [isDateShow, setIsDateShow] = useState(false);
-  const [isTimeShow, setIsTimeShow] = useState(false);
+  const [isDateShow, setIsDateShow] = useState(true);
+  const [isTimeShow, setIsTimeShow] = useState(true);
   const [startDate, setStartDate] = useState(new Date(Date.now()));
   const [endDate, setEndDate] = useState(new Date(Date.now()));
   const [startTime, setStartTime] = useState(new Date(Date.now()));
@@ -103,7 +103,8 @@ const AddCourse = ({ navigation }) => {
         <View style={styles.comp}>
           <Text style={styles.label}>Description:</Text>
           <TextInput
-            style={styles.input}
+            style={styles.textField}
+            multiline={true}
             placeholder={"Enter Course Description"}
             onChangeText={(value) =>
               setCourse({ ...course, description: value })
@@ -225,6 +226,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 3,
   },
+  textField: {
+    borderWidth: 1,
+    borderColor: "#173E7A",
+    height: 80,
+    padding: 10,
+    borderRadius: 3,
+  },
   comp: {
     marginTop: 10,
     marginBottom: 10,
@@ -246,10 +254,19 @@ const styles = StyleSheet.create({
     width: 120,
   },
   btn: {
-    marginTop: 10,
+    height: 50,
+    width: "100%",
+
+    alignSelf: "center",
+    marginTop: 20,
+    borderRadius: 7,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#173E7A",
   },
   btnTxt: {
-    color: "white",
+    fontWeight: "bold",
+    color: "#fff",
+    fontSize: 15,
   },
 });

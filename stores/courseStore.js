@@ -71,16 +71,24 @@ class CourseStore {
       );
     }
   };
-  joinCourse = async (course, navigation) => {
+  joinCourse = async (course, navigation, toast) => {
     try {
       const res = await api.post(`/courses/${course._id}`);
       const tempArr = this.courses.map((course) =>
         course._id === res.data._id ? res.data : course
       );
+      toast.show({
+        title: "You Enrolled Successfully",
+        status: "success",
+      });
       this.courses = tempArr;
       navigation.navigate("CourseList");
     } catch (error) {
       console.log(error);
+      toast.show({
+        title: "You already Enrolled",
+        status: "error",
+      });
     }
   };
 }
