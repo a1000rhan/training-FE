@@ -80,8 +80,9 @@ const styles = StyleSheet.create({
   },
   l1: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     marginBottom: 10,
+    padding: 10,
   },
   l2: {
     flexDirection: "row",
@@ -98,6 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "#173E7A",
+    width: "50%",
   },
   staffId: {
     fontSize: 20,
