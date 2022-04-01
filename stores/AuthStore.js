@@ -53,6 +53,7 @@ class AuthStore {
       this.setUser(resp.data.token);
       courseStore.fetchCourse();
       requestStore.fetchRequests();
+      requestStore.fetchAllRequests();
 
       this.loading = false;
       navigation.navigate("Drawer");
@@ -81,6 +82,8 @@ class AuthStore {
       // });
 
       courseStore.fetchCourse();
+      requestStore.fetchRequests();
+      requestStore.fetchAllRequests();
     } catch (error) {
       toast.show({
         title: "Sign in Failed",

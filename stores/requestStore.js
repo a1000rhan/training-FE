@@ -6,6 +6,7 @@ import courseStore from "./courseStore";
 
 class RequestStore {
   requests = [];
+  allRequests = [];
   loading = true;
 
   constructor() {
@@ -24,6 +25,18 @@ class RequestStore {
       console.log(error);
     }
   };
+
+  fetchAllRequests = async () => {
+    try {
+      const res = await api.get("/requests/all");
+
+      this.allRequests = res.data;
+      this.loading = false;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   approveCourse = async (reqId, toast) => {
     try {
       const res = await api.post(`/requests/${reqId}`);

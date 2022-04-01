@@ -43,7 +43,14 @@ const RequestCard = ({ request }) => {
             </Button>
           </View>
         ) : (
-          <Button></Button>
+          <Text
+            style={{
+              fontWeight: "bold",
+              color: request.status === "approved" ? "green" : "red",
+            }}
+          >
+            {request.status.toUpperCase()}
+          </Text>
         )}
       </View>
     </View>
@@ -57,7 +64,7 @@ const styles = StyleSheet.create({
     width: "85%",
     padding: 10,
     flex: 1,
-    marginBottom: 30,
+    marginBottom: 10,
     shadowColor: "#000",
     borderRadius: 6,
     shadowOffset: {

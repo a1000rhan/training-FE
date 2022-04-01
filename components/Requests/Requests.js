@@ -1,12 +1,15 @@
 import { ScrollView } from "native-base";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import requestStore from "../../stores/requestStore";
 import { observer } from "mobx-react";
 
 import Loading from "../Loading";
 import RequestCard from "./RequestCard";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+
 const Requests = ({ navigation }) => {
   if (requestStore.loading) {
     <Loading />;
@@ -15,6 +18,10 @@ const Requests = ({ navigation }) => {
   const requests = requestStore.requests.map((request) => (
     <RequestCard request={request} key={request._id} />
   ));
+  const allRequests = requestStore.allRequests.map((request) => {
+    if (request.status !== "pending")
+      return <RequestCard request={request} key={request._id} />;
+  });
 
   return (
     <>
@@ -29,10 +36,15 @@ const Requests = ({ navigation }) => {
               navigation.toggleDrawer();
             }}
           />
-          <Text>Requests</Text>
+          <View style={styles.titleContainer}>
+            <Text style={styles.Title}>Requests</Text>
+          </View>
         </View>
       </View>
-      <ScrollView>{requests}</ScrollView>
+      <ScrollView>
+        {requests}
+        {allRequests}
+      </ScrollView>
     </>
   );
 };
@@ -56,6 +68,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     display: "flex",
     width: "100%",
+  },
+  titleContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: windowHeight / 11,
+    marginLeft: windowWidth / 5,
+    position: "absolute",
+  },
+  Title: {
+    fontSize: 50,
+    color: "white",
+    fontWeight: "bold",
   },
   ico1: {
     marginLeft: 15,
