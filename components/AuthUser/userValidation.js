@@ -13,7 +13,7 @@ export const signinschema = yup.object({
   // )
 });
 export const schema = yup.object({
-  staffId: yup.number().min(2).required("Please Enter the Correct Staff ID"),
+  // staffId: yup.number().min(2).required("Please Enter the Correct Staff ID"),
 
   password: yup
     .string()

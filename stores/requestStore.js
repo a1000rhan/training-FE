@@ -11,7 +11,7 @@ class RequestStore {
   constructor() {
     makeAutoObservable(this, {});
   }
-  fetchUserProfile = async () => {
+  fetchRequests = async () => {
     try {
       const res = await api.get("/requests");
       console.log(
@@ -22,6 +22,39 @@ class RequestStore {
       this.loading = false;
     } catch (error) {
       console.log(error);
+    }
+  };
+  approveCourse = async (reqId, toast) => {
+    try {
+      const res = await api.post(`/requests/${reqId}`);
+      this.loading = false;
+      this.fetchRequests();
+      toast.show({
+        title: "This Course is Approved",
+        placement: "top",
+      });
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: requestStore.js ~ line 31 ~ RequestStore ~ approveCourse= ~ error",
+        error
+      );
+    }
+  };
+  rejectRequest = async (reqId, toast) => {
+    try {
+      const res = await api.post(`/requests/${reqId}/reject`);
+      this.loading = false;
+      this.fetchRequests();
+      toast.show({
+        title: "This Course is Rejected",
+        status: "error",
+        placement: "top",
+      });
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: requestStore.js ~ line 31 ~ RequestStore ~ approveCourse= ~ error",
+        error
+      );
     }
   };
 }

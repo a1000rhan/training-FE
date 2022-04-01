@@ -44,7 +44,7 @@ const CourseItem = ({ course, navigation }) => {
               style={styles.btn}
               justifyContent={"center"}
               color={"white"}
-              onPress={() => courseStore.joinCourse(course)}
+              onPress={() => courseStore.joinCourse(course, navigation, toast)}
             >
               <Text style={styles.btnTxt}>Enroll</Text>
             </Button>

@@ -24,7 +24,7 @@ const DrawerNavigator = () => {
           component={CourseList}
           options={{
             drawerIcon: ({ focused, size }) => (
-              <Icon name="home" size={size} color={"#173E7A"} />
+              <Icon name="home-outline" size={size} color={"#173E7A"} />
             ),
             drawerActiveBackgroundColor: "#edeff2",
             drawerLabel: "Course List",
@@ -34,20 +34,36 @@ const DrawerNavigator = () => {
           }}
         />
       ) : (
-        <Drawer.Screen
-          name="Requests"
-          component={Requests}
-          options={{
-            drawerIcon: ({ size }) => (
-              <Icon name="git-pull-request" size={size} color={"#173E7A"} />
-            ),
-            drawerActiveBackgroundColor: "#edeff2",
-            drawerLabel: "Requests",
-            drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
-            headerTitleStyle: { fontSize: 40, color: "white" },
-            headerShown: false,
-          }}
-        />
+        <>
+          <Drawer.Screen
+            name="Requests"
+            component={Requests}
+            options={{
+              drawerIcon: ({ size }) => (
+                <Icon2 name="solution1" size={size} color={"#173E7A"} />
+              ),
+              drawerActiveBackgroundColor: "#edeff2",
+              drawerLabel: "Requests",
+              drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
+              headerTitleStyle: { fontSize: 40, color: "white" },
+              headerShown: false,
+            }}
+          />
+          <Drawer.Screen
+            name="CourseList"
+            component={CourseList}
+            options={{
+              drawerIcon: ({ focused, size }) => (
+                <Icon name="home-outline" size={size} color={"#173E7A"} />
+              ),
+              drawerActiveBackgroundColor: "#edeff2",
+              drawerLabel: "Courses",
+              drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
+              headerShown: false,
+              headerTitleStyle: { fontSize: 40, color: "white" },
+            }}
+          />
+        </>
       )}
       <Drawer.Screen
         name="UserProfile"

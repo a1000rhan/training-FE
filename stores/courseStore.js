@@ -80,6 +80,7 @@ class CourseStore {
       toast.show({
         title: "You Enrolled Successfully",
         status: "success",
+        placement: "top",
       });
       this.courses = tempArr;
       navigation.navigate("CourseList");

@@ -3,6 +3,7 @@ import decode from "jwt-decode";
 import api from "./api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import courseStore from "./courseStore";
+import requestStore from "./requestStore";
 
 class AuthStore {
   user = null;
@@ -51,6 +52,8 @@ class AuthStore {
       const resp = await api.post("/user/signin", data);
       this.setUser(resp.data.token);
       courseStore.fetchCourse();
+      requestStore.fetchRequests();
+
       this.loading = false;
       navigation.navigate("Drawer");
     } catch (error) {
@@ -63,6 +66,10 @@ class AuthStore {
   };
 
   Signup = async (data, navigation, toast) => {
+    console.log(
+      "🚀 ~ file: AuthStore.js ~ line 69 ~ AuthStore ~ Signup= ~ data",
+      data
+    );
     try {
       const user = { staffId: data.staffId, password: data.password };
       const resp = await api.put("/user", user);
