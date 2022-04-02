@@ -21,8 +21,6 @@ import { observer } from "mobx-react";
 import Loading from "../Loading";
 
 const CourseList = ({ navigation }) => {
-  // if (authStore.loading) return <Loading />;
-
   const [query, setQuery] = useState("");
   const [refreshing, setRefreshing] = useState(false);
 

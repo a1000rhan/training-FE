@@ -12,6 +12,7 @@ import {
 import { Avatar } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import authStore from "../../stores/AuthStore";
+import CourseItem from "../Course/CourseItem";
 import Loading from "../Loading";
 
 const windowWidth = Dimensions.get("window").width;
@@ -24,7 +25,11 @@ const UserProfile = ({ navigation }) => {
   if (authStore.profileLoading) {
     return <Loading />;
   }
-  // const courses= authStore.profile.courses?.map((course)=><Text>course.</Text>))
+
+  const courses = authStore.profile.courses.map((course) => (
+    <CourseItem course={course} key={course._id} navigation={navigation} />
+  ));
+
   return (
     <>
       <View style={styles.header}>
@@ -72,6 +77,7 @@ const UserProfile = ({ navigation }) => {
           <View style={styles.card}>
             <Text style={styles.subTitle}>Courses:</Text>
             <Text style={styles.txt}></Text>
+            {courses}
           </View>
         </ScrollView>
       </ImageBackground>

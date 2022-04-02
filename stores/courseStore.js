@@ -5,6 +5,7 @@ import api from "./api";
 class CourseStore {
   courses = [];
   loading = true;
+
   constructor() {
     makeAutoObservable(this, {});
   }
@@ -77,12 +78,13 @@ class CourseStore {
       const tempArr = this.courses.map((course) =>
         course._id === res.data._id ? res.data : course
       );
+
+      this.courses = tempArr;
       toast.show({
         title: "You Enrolled Successfully",
         status: "success",
         placement: "top",
       });
-      this.courses = tempArr;
       navigation.navigate("CourseList");
     } catch (error) {
       console.log(error);
