@@ -56,7 +56,7 @@ class AuthStore {
       requestStore.fetchAllRequests();
 
       this.loading = false;
-      navigation.navigate("Drawer");
+      navigation.replace("Drawer");
     } catch (error) {
       toast.show({
         title: "Sign in Failed",
@@ -75,7 +75,7 @@ class AuthStore {
       const user = { staffId: data.staffId, password: data.password };
       const resp = await api.put("/user", user);
       this.setUser(resp.data.token);
-      navigation.navigate("Drawer");
+      navigation.replace("Drawer");
       // toast.show({
       //   title: "Sign in Successfully",
       //   status: "success",

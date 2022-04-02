@@ -63,11 +63,11 @@ const UserProfile = ({ navigation }) => {
         <ScrollView>
           <View style={styles.card}>
             <Text style={styles.subTitle}>First Name:</Text>
-            <Text style={styles.txt}>{authStore.profile.firstName}</Text>
+            <Text style={styles.txt}>{authStore.profile?.firstName}</Text>
           </View>
           <View style={styles.card}>
             <Text style={styles.subTitle}>Last Name:</Text>
-            <Text style={styles.txt}>{authStore.profile.lastName}</Text>
+            <Text style={styles.txt}>{authStore.profile?.lastName}</Text>
           </View>
           <View style={styles.card}>
             <Text style={styles.subTitle}>Courses:</Text>

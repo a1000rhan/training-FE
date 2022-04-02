@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions,
   Image,
+  RefreshControl,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Input } from "native-base";
@@ -23,6 +24,14 @@ const CourseList = ({ navigation }) => {
   // if (authStore.loading) return <Loading />;
 
   const [query, setQuery] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    if (courseStore.loading) {
+      setRefreshing(true);
+    }
+    courseStore.fetchCourse();
+  };
 
   const courseArr = courseStore.courses
     .filter((course) =>
@@ -77,7 +86,14 @@ const CourseList = ({ navigation }) => {
         </View>
       </View>
       <>
-        <ScrollView style={styles.scroll}>{courseArr}</ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          style={styles.scroll}
+        >
+          {courseArr}
+        </ScrollView>
       </>
     </>
   );

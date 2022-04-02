@@ -1,6 +1,12 @@
 import { ScrollView } from "native-base";
-import React from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Dimensions,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import requestStore from "../../stores/requestStore";
 import { observer } from "mobx-react";
@@ -11,9 +17,16 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const Requests = ({ navigation }) => {
-  if (requestStore.loading) {
-    <Loading />;
-  }
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    if (requestStore.loading) {
+      <Loading />;
+      setRefreshing(true);
+    }
+    requestStore.fetchAllRequests();
+    requestStore.fetchRequests();
+  };
 
   const requests = requestStore.requests.map((request) => (
     <RequestCard request={request} key={request._id} />
@@ -41,7 +54,11 @@ const Requests = ({ navigation }) => {
           </View>
         </View>
       </View>
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         {requests}
         {allRequests}
       </ScrollView>
