@@ -1,9 +1,13 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, configure } from "mobx";
 import decode from "jwt-decode";
 import api from "./api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import courseStore from "./courseStore";
 import requestStore from "./requestStore";
+
+configure({
+  enforceActions: "never",
+});
 
 class AuthStore {
   user = null;
@@ -24,15 +28,15 @@ class AuthStore {
     }
   };
 
-  fetchAllProfiles = async () => {
-    try {
-      const res = await api.get("/profiles/allprofiles");
-      this.profile = res.data;
-      this.profileLoading = false;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // fetchAllProfiles = async () => {
+  //   try {
+  //     const res = await api.get("/profiles/allprofiles");
+  //     this.profile = res.data;
+  //     this.profileLoading = false;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   setUser = (token) => {
     AsyncStorage.setItem("myToken", token);
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -54,7 +58,7 @@ class AuthStore {
       courseStore.fetchCourse();
       requestStore.fetchRequests();
       requestStore.fetchAllRequests();
-
+      this.fetchUserProfile();
       this.loading = false;
       navigation.replace("Drawer");
     } catch (error) {
@@ -84,6 +88,7 @@ class AuthStore {
       courseStore.fetchCourse();
       requestStore.fetchRequests();
       requestStore.fetchAllRequests();
+      this.fetchUserProfile();
     } catch (error) {
       toast.show({
         title: "Sign in Failed",
@@ -107,6 +112,7 @@ class AuthStore {
       const exp = decode(token).exp;
       if (exp > currentTime) {
         this.setUser(token);
+        this.fetchUserProfile();
       } else {
         this.signOut();
       }

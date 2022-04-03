@@ -13,12 +13,19 @@ import { Avatar, useToast } from "native-base";
 import courseStore from "../../stores/courseStore";
 import { baseURL } from "../../stores/api";
 import authStore from "../../stores/AuthStore";
+import Loading from "../Loading";
 
 const CourseItem = ({ course, navigation }) => {
   const toast = useToast();
+  if (authStore.loading || authStore.profileLoading) {
+    <Loading />;
+  }
   const handleRemove = () => {
     courseStore.deleteCourse(course._id, navigation);
   };
+  const theStudent = course.students.some(
+    (student) => student._id === authStore.profile?._id
+  );
 
   return (
     <Pressable
@@ -40,14 +47,20 @@ const CourseItem = ({ course, navigation }) => {
             <Text style={styles.courseTitle}>{course.title}</Text>
           </View>
           {authStore.user?.type === "student" ? (
-            <Button
-              style={styles.btn}
-              justifyContent={"center"}
-              color={"white"}
-              onPress={() => courseStore.joinCourse(course, navigation, toast)}
-            >
-              <Text style={styles.btnTxt}>Enroll</Text>
-            </Button>
+            theStudent ? (
+              <Button>leave</Button>
+            ) : (
+              <Button
+                style={styles.btn}
+                justifyContent={"center"}
+                color={"white"}
+                onPress={() =>
+                  courseStore.joinCourse(course, navigation, toast)
+                }
+              >
+                <Text style={styles.btnTxt}>Enroll</Text>
+              </Button>
+            )
           ) : (
             <Button
               style={styles.btn2}
@@ -106,20 +119,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#4f5156",
   },
-
   country: {
     marginTop: 10,
   },
   btn: {
     height: 45,
     width: 100,
-
+    borderRadius: 10,
     backgroundColor: "#173E7A",
   },
   btn2: {
     height: 45,
     width: 100,
-
+    borderRadius: 10,
     backgroundColor: "#B92F1A",
   },
   btnTxt: {

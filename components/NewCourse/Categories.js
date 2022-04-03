@@ -67,19 +67,32 @@ const Categories = ({ route, navigation }) => {
   //............Skills............
   const [skills, setSkills] = useState();
   const [newSkills, setNewSkills] = useState([]);
+  // const [deleteSkill, setDeleteSkill] = useState(newSkills);
 
   const handelChangeSkill = (event) => {
     setSkills(event);
   };
   const addNewSkill = () => {
-    skills && setNewSkills([...newSkills, skills]);
+    setNewSkills([...newSkills, skills]);
     setSkills("");
   };
   const SkillsList = newSkills.map((skill, index) => (
-    <Chip key={index} style={styles.chip} onPress={() => {}}>
+    <Chip
+      key={index}
+      style={styles.chip}
+      onPress={() => deleteCourseSkills(index)}
+    >
       <Text style={styles.chipText}>{skill}</Text>
     </Chip>
   ));
+  const deleteCourseSkills = (selectedSkill) => {
+    setNewSkills(newSkills.filter((skill, index) => index != selectedSkill));
+  };
+
+  console.log(
+    "🚀 ~ file: Categories.js ~ line 88 ~ Categories ~ newSkills",
+    newSkills
+  );
   //...........handle Submit............
   const handleSubmit = () => {
     let tempCourse = { ...course, skills: newSkills };
@@ -254,7 +267,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#173E7A",
   },
   uplodImg: {
-    width: 200,
+    width: "100%",
     height: 150,
     borderWidth: 1,
     borderColor: "#173E7A",

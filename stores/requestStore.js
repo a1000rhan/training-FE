@@ -1,9 +1,12 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, configure } from "mobx";
 import decode from "jwt-decode";
 import api from "./api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import courseStore from "./courseStore";
 
+configure({
+  enforceActions: "never",
+});
 class RequestStore {
   requests = [];
   allRequests = [];

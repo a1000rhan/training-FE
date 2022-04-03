@@ -38,6 +38,9 @@ const CourseList = ({ navigation }) => {
     .map((course) => (
       <CourseItem course={course} key={course._id} navigation={navigation} />
     ));
+
+  console.log(authStore.profile);
+
   return (
     <>
       <View style={styles.searchBar}>

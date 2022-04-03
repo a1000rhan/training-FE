@@ -19,20 +19,36 @@ const DrawerNavigator = () => {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       {authStore.user.type === "student" ? (
-        <Drawer.Screen
-          name="CourseList"
-          component={CourseList}
-          options={{
-            drawerIcon: ({ focused, size }) => (
-              <Icon name="home-outline" size={size} color={"#173E7A"} />
-            ),
-            drawerActiveBackgroundColor: "#edeff2",
-            drawerLabel: "Course List",
-            drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
-            headerShown: false,
-            headerTitleStyle: { fontSize: 40, color: "white" },
-          }}
-        />
+        <>
+          <Drawer.Screen
+            name="CourseList"
+            component={CourseList}
+            options={{
+              drawerIcon: ({ focused, size }) => (
+                <Icon name="home-outline" size={size} color={"#173E7A"} />
+              ),
+              drawerActiveBackgroundColor: "#edeff2",
+              drawerLabel: "Course List",
+              drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
+              headerShown: false,
+              headerTitleStyle: { fontSize: 40, color: "white" },
+            }}
+          />
+          <Drawer.Screen
+            name="UserProfile"
+            component={UserProfile}
+            options={{
+              drawerIcon: ({ size }) => (
+                <Icon2 name="profile" size={size} color={"#173E7A"} />
+              ),
+              drawerActiveBackgroundColor: "#edeff2",
+              drawerLabel: "Profile",
+              drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
+              headerShown: false,
+              headerTitleStyle: { fontSize: 40, color: "white" },
+            }}
+          />
+        </>
       ) : (
         <>
           <Drawer.Screen
@@ -65,20 +81,6 @@ const DrawerNavigator = () => {
           />
         </>
       )}
-      <Drawer.Screen
-        name="UserProfile"
-        component={UserProfile}
-        options={{
-          drawerIcon: ({ size }) => (
-            <Icon2 name="profile" size={size} color={"#173E7A"} />
-          ),
-          drawerActiveBackgroundColor: "#edeff2",
-          drawerLabel: "Profile",
-          drawerLabelStyle: { color: "#173E7A", fontWeight: "bold" },
-          headerShown: false,
-          headerTitleStyle: { fontSize: 40, color: "white" },
-        }}
-      />
     </Drawer.Navigator>
   );
 };

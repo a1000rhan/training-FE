@@ -19,16 +19,20 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const UserProfile = ({ navigation }) => {
-  if (authStore.user?.type === "student" && !authStore.profile) {
-    authStore.fetchUserProfile();
-  }
+  // if (authStore.user?.type === "student" && !authStore.profile) {
+  //   authStore.fetchUserProfile();
+  // }
   if (authStore.profileLoading) {
     return <Loading />;
   }
 
-  const courses = authStore.profile.courses.map((course) => (
+  const courses = authStore.profile?.courses.map((course) => (
     <CourseItem course={course} key={course._id} navigation={navigation} />
   ));
+  console.log(
+    "🚀 ~ file: UserProfile.js ~ line 30 ~ UserProfile ~ authStore.profile",
+    authStore.profile
+  );
 
   return (
     <>
