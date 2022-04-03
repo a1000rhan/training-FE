@@ -43,8 +43,14 @@ class RequestStore {
   approveCourse = async (reqId, toast) => {
     try {
       const res = await api.post(`/requests/${reqId}`);
+      const tempArr = this.allRequests.map((request) =>
+        request._id === reqId
+          ? { ...request, status: res.data.status }
+          : request
+      );
+
+      this.allRequests = tempArr;
       this.loading = false;
-      this.fetchRequests();
       toast.show({
         title: "This Course is Approved",
         placement: "top",
@@ -59,6 +65,13 @@ class RequestStore {
   rejectRequest = async (reqId, toast) => {
     try {
       const res = await api.post(`/requests/${reqId}/reject`);
+      const tempArr = this.allRequests.map((request) =>
+        request._id === reqId
+          ? { ...request, status: res.data.status }
+          : request
+      );
+
+      this.allRequests = tempArr;
       this.loading = false;
       this.fetchRequests();
       toast.show({

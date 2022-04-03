@@ -111,7 +111,8 @@ export default observer(Signup);
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    width: "80%",
+    borderRadius: 20,
+    width: "85%",
     height: "80%",
     display: "flex",
     marginTop: 60,
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: COLORS.blue,
     marginTop: 20,
-    borderRadius: 7,
+    borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
   },

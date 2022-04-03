@@ -173,7 +173,8 @@ export default observer(Signin);
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    width: "80%",
+    borderRadius: 20,
+    width: "85%",
     height: "80%",
     display: "flex",
     marginTop: 60,
@@ -193,6 +194,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: 50,
+
     width: "100%",
     backgroundColor: COLORS.blue,
     marginTop: 20,
@@ -207,7 +209,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blue,
     marginTop: 20,
     marginRight: 2,
-    borderRadius: 7,
+    // borderRadius: 20,
+    borderTopLeftRadius: 15,
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 15,
+    borderTopRightRadius: 0,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -216,6 +222,10 @@ const styles = StyleSheet.create({
     width: "20%",
     backgroundColor: COLORS.blue,
     marginTop: 20,
+    borderTopLeftRadius: 0,
+    borderBottomRightRadius: 15,
+    borderBottomLeftRadius: 0,
+    borderTopRightRadius: 15,
     paddingTop: 3,
     paddingLeft: 8,
   },

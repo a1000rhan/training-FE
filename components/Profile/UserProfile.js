@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   Dimensions,
   ImageBackground,
   ScrollView,
@@ -62,12 +61,16 @@ const UserProfile = ({ navigation }) => {
       <>
         <ScrollView>
           <View style={styles.card}>
-            <Text style={styles.subTitle}>First Name:</Text>
-            <Text style={styles.txt}>{authStore.profile?.firstName}</Text>
+            <Text style={styles.subTitle}>
+              First Name:
+              <Text style={styles.txt}> {authStore.profile?.firstName}</Text>
+            </Text>
           </View>
           <View style={styles.card}>
-            <Text style={styles.subTitle}>Last Name:</Text>
-            <Text style={styles.txt}>{authStore.profile?.lastName}</Text>
+            <Text style={styles.subTitle}>
+              Last Name:
+              <Text style={styles.txt}> {authStore.profile?.lastName}</Text>
+            </Text>
           </View>
           <View style={styles.card}>
             <Text style={styles.subTitle}>Courses:</Text>
@@ -121,8 +124,9 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "95%",
-    padding: 10,
+    padding: 15,
     flex: 1,
+    borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -139,5 +143,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#4f5156",
     marginBottom: 5,
+  },
+  txt: {
+    fontSize: 20,
+    fontWeight: "normal",
   },
 });

@@ -104,10 +104,11 @@ const styles = StyleSheet.create({
 
   card: {
     width: "85%",
-    padding: 10,
+    paddingLeft: 20,
+    paddingBottom: 20,
     flex: 1,
     shadowColor: "#000",
-    borderRadius: 6,
+    borderRadius: 20,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -152,8 +153,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "#4f5156",
-    marginBottom: 5,
-    marginTop: 25,
+    marginBottom: 6,
+    marginTop: 20,
   },
   txt: {
     color: "#4f5156",
@@ -166,6 +167,7 @@ const styles = StyleSheet.create({
   skl: {
     margin: 10,
     backgroundColor: COLORS.blue,
+    borderRadius: 12,
   },
   txtSkill: { color: "white", fontWeight: "bold" },
   btn: {
@@ -174,7 +176,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blue,
     alignSelf: "center",
     marginTop: 20,
-    borderRadius: 7,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
   },

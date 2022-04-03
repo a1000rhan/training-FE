@@ -28,13 +28,17 @@ const Requests = ({ navigation }) => {
     requestStore.fetchRequests();
   };
 
-  const requests = requestStore.requests.map((request) => (
-    <RequestCard request={request} key={request._id} />
-  ));
+  // const requests = requestStore.requests.map((request) => (
+  //   <RequestCard request={request} key={request._id} />
+  // ));
   const allRequests = requestStore.allRequests.map((request) => {
-    if (request.status !== "pending")
-      return <RequestCard request={request} key={request._id} />;
+    // if (request.status !== "pending")
+    return <RequestCard request={request} key={request._id} />;
   });
+  console.log(
+    "🚀 ~ file: Requests.js ~ line 35 ~ allRequests ~ requestStore.allRequests",
+    requestStore.allRequests
+  );
 
   return (
     <>
@@ -59,7 +63,6 @@ const Requests = ({ navigation }) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {requests}
         {allRequests}
       </ScrollView>
     </>
