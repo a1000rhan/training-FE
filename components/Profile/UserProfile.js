@@ -59,16 +59,7 @@ const UserProfile = ({ navigation }) => {
           </Text>
         </View>
       </View>
-      <ImageBackground
-        imageStyle={{
-          opacity: 0.1,
-          width: "80%",
-          height: "80%",
-          paddingLeft: 1000,
-        }}
-        style={styles.bg}
-        source={require("../../assets/Lesson.png")}
-      >
+      <>
         <ScrollView>
           <View style={styles.card}>
             <Text style={styles.subTitle}>First Name:</Text>
@@ -84,7 +75,7 @@ const UserProfile = ({ navigation }) => {
             {courses}
           </View>
         </ScrollView>
-      </ImageBackground>
+      </>
     </>
   );
 };

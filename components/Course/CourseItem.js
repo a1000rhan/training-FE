@@ -16,6 +16,10 @@ import authStore from "../../stores/AuthStore";
 import Loading from "../Loading";
 
 const CourseItem = ({ course, navigation }) => {
+  console.log(
+    "🚀 ~ file: CourseItem.js ~ line 19 ~ CourseItem ~ course",
+    course
+  );
   const toast = useToast();
   if (authStore.loading || authStore.profileLoading) {
     <Loading />;
@@ -23,8 +27,8 @@ const CourseItem = ({ course, navigation }) => {
   const handleRemove = () => {
     courseStore.deleteCourse(course._id, navigation);
   };
-  const theStudent = course.students.some(
-    (student) => student._id === authStore.profile?._id
+  const theStudent = course.students?.some(
+    (student) => (student._id || student) === authStore.profile?._id
   );
 
   return (
@@ -48,7 +52,7 @@ const CourseItem = ({ course, navigation }) => {
           </View>
           {authStore.user?.type === "student" ? (
             theStudent ? (
-              <Button>leave</Button>
+              <Button>Enrolled</Button>
             ) : (
               <Button
                 style={styles.btn}
