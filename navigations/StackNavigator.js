@@ -9,21 +9,26 @@ import Signup from "../components/AuthUser/Signup";
 import AddCourse from "../components/NewCourse/AddCourse";
 import Signin from "../components/AuthUser/Signin";
 import Categories from "../components/NewCourse/Categories";
-
+import Notification from "../Notification";
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
+      {/* <Stack.Screen
+        name="Notif"
+        options={{ headerShown: false }}
+        component={Notification}
+      /> */}
       <Stack.Screen
         name="Home"
         options={{ headerShown: false }}
         component={Home}
       />
-        <Stack.Screen
-          name="Signin"
-          options={{ headerShown: false }}
-          component={Signin}
-        />
+      <Stack.Screen
+        name="Signin"
+        options={{ headerShown: false }}
+        component={Signin}
+      />
       <Stack.Screen
         name="Signup"
         options={{ headerShown: false }}

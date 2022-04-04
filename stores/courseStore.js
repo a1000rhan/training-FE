@@ -1,6 +1,6 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { makeAutoObservable, configure } from "mobx";
 import api from "./api";
+import * as Notifications from "expo-notifications";
 configure({
   enforceActions: "never",
 });
@@ -74,17 +74,26 @@ class CourseStore {
       );
     }
   };
+
+  schedulePushNotification = async () => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "You've got mail! 📬",
+        body: "Here is the notification body",
+        data: { data: "goes here" },
+      },
+      trigger: { seconds: 2 },
+    });
+  };
+
   joinCourse = async (course, navigation, toast) => {
     try {
       const res = await api.post(`/courses/${course._id}`);
-      console.log(
-        "🚀 ~ file: courseStore.js ~ line 78 ~ CourseStore ~ joinCourse= ~ res",
-        res.data
-      );
+
       const tempArr = this.courses.map((course) =>
         course._id === res.data._id ? res.data : course
       );
-
+      this.schedulePushNotification();
       this.courses = tempArr;
       toast.show({
         title: "You Enrolled Successfully",

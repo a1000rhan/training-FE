@@ -7,7 +7,7 @@ import {
   ImageBackground,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-
+import {} from "../../Notification";
 import { Button } from "react-native-paper";
 import { Avatar, useToast } from "native-base";
 import courseStore from "../../stores/courseStore";

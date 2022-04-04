@@ -20,10 +20,8 @@ const Requests = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = () => {
-    if (requestStore.loading) {
-      <Loading />;
-      setRefreshing(true);
-    }
+    setRefreshing(true);
+
     requestStore.fetchAllRequests();
     requestStore.fetchRequests();
   };
