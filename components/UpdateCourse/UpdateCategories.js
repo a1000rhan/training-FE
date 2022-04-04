@@ -14,24 +14,31 @@ import * as ImagePicker from "expo-image-picker";
 import Icon from "react-native-vector-icons/Ionicons";
 import courseStore from "../../stores/courseStore";
 import { baseURL } from "../../stores/api";
+import Loading from "../Loading";
 
 const UpdateCategories = ({ route, navigation }) => {
-  const inComing = route.params.tempCourse;
+  if (courseStore.loading) {
+    <Loading />;
+  }
+  const inComing = route.params.course;
   console.log(
-    "🚀 ~ file: UpdateCategories.js ~ line 20 ~ UpdateCategories ~ inComing",
+    "🚀 ~ file: UpdateCategories.js ~ line 24 ~ UpdateCategories ~ inComing",
     inComing
   );
+
   const [course, setCourse] = useState({
+    _id: inComing._id,
     title: inComing.title,
     description: inComing.description,
     time: inComing.time,
     date: inComing.date,
     location: inComing.location,
-    maxSeats: 20,
-    image: "",
-    skills: [],
+    maxSeats: inComing.maxSeats,
+    image: inComing.image,
+    skills: inComing.skills,
   });
-  const [uploadedImage, setUploadedImage] = useState(null);
+
+  const [uploadedImage, setUploadedImage] = useState(baseURL + course.image);
 
   //......Image Picker............
   const _pickImage = async () => {
@@ -70,7 +77,7 @@ const UpdateCategories = ({ route, navigation }) => {
   };
   //............Skills............
   const [skills, setSkills] = useState();
-  const [newSkills, setNewSkills] = useState([]);
+  const [newSkills, setNewSkills] = useState(course.skills);
   // const [deleteSkill, setDeleteSkill] = useState(newSkills);
 
   const handelChangeSkill = (event) => {
@@ -101,7 +108,7 @@ const UpdateCategories = ({ route, navigation }) => {
   const handleSubmit = () => {
     let tempCourse = { ...course, skills: newSkills };
 
-    courseStore.createCourse(tempCourse, navigation);
+    courseStore.updateCourse(tempCourse, navigation);
   };
 
   return (
@@ -112,12 +119,12 @@ const UpdateCategories = ({ route, navigation }) => {
             color={"white"}
             name="arrow-back-circle-sharp"
             size={35}
-            onPress={() => {
-              navigation.navigate("UpdateCourse");
-            }}
+            onPress={() =>
+              navigation.navigate("UpdateCourse", { course: course })
+            }
           />
         </View>
-        <Text style={styles.title}>Add New Course</Text>
+        <Text style={styles.title}>Update Course</Text>
       </View>
 
       <ScrollView style={styles.container}>
@@ -125,6 +132,7 @@ const UpdateCategories = ({ route, navigation }) => {
           <Text style={styles.label}>Max Seats</Text>
           <TextInput
             style={styles.input}
+            value={course.maxSeats}
             placeholder={"Enter number of Seats"}
             onChangeText={(value) => setCourse({ ...course, maxSeats: value })}
           />
@@ -134,7 +142,7 @@ const UpdateCategories = ({ route, navigation }) => {
           <Text style={styles.label}>Skills</Text>
           <TextInput
             style={styles.input}
-            value={skills}
+            value={course.skills}
             placeholder={"Enter Course Title"}
             onChangeText={handelChangeSkill}
           />
@@ -159,7 +167,7 @@ const UpdateCategories = ({ route, navigation }) => {
         </TouchableOpacity>
 
         <Button style={styles.btn} onPress={handleSubmit}>
-          <Text style={styles.btnTxt}>Add Course</Text>
+          <Text style={styles.btnTxt}>Update Course</Text>
         </Button>
       </ScrollView>
     </>

@@ -12,16 +12,29 @@ import { Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
+import courseStore from "../../stores/courseStore";
+import Loading from "../Loading";
 
 const UpdateCourse = ({ navigation, route }) => {
-  const comCourse = route.params.courseUp;
+  if (courseStore.loading) {
+    <Loading />;
+  }
+  const UpCourse = route.params.course;
+
   const [course, setCourse] = useState({
-    title: comCourse.title,
-    time: comCourse.time,
-    description: comCourse.description,
-    date: comCourse.date,
-    location: comCourse.location,
+    title: UpCourse.title,
+    time: UpCourse.time,
+    description: UpCourse.description,
+    date: UpCourse.date,
+    location: UpCourse.location,
+    maxSeats: UpCourse.maxSeats,
+    image: UpCourse.image,
+    skills: UpCourse.skills,
   });
+  console.log(
+    "🚀 ~ file: UpdateCourse.js ~ line 33 ~ UpdateCourse ~ course",
+    course
+  );
   const [isDateShow, setIsDateShow] = useState(true);
   const [isTimeShow, setIsTimeShow] = useState(true);
   const [startDate, setStartDate] = useState(new Date(Date.now()));

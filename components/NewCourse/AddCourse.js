@@ -182,7 +182,7 @@ const AddCourse = ({ navigation }) => {
             onChangeText={(value) => setCourse({ ...course, location: value })}
           />
         </View>
-        <Button style={styles.btn} onPress={() => handleSubmit()}>
+        <Button style={styles.btn} onPress={handleSubmit}>
           <Text style={styles.btnTxt}>Next</Text>
         </Button>
       </View>

@@ -49,10 +49,6 @@ class CourseStore {
       formData.append("maxSeats", course.maxSeats);
       formData.append("image", course.image);
       course.skills.map((skill) => formData.append("skills", skill));
-      console.log(
-        "🚀 ~ file: courseStore.js ~ line 47 ~ CourseStore ~ createCourse= ~ formData",
-        formData
-      );
 
       const res = await api({
         method: "POST",
@@ -86,14 +82,10 @@ class CourseStore {
       formData.append("maxSeats", course.maxSeats);
       formData.append("image", course.image);
       course.skills.map((skill) => formData.append("skills", skill));
-      console.log(
-        "🚀 ~ file: courseStore.js ~ line 47 ~ CourseStore ~ createCourse= ~ formData",
-        formData
-      );
 
       const res = await api({
         method: "PUT",
-        url: "/courses",
+        url: `/courses/${course._id}`,
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
         transformRequest: (data, error) => {

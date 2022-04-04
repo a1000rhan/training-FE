@@ -47,7 +47,7 @@ const CourseDetails = ({ route, navigation }) => {
             style={{ marginRight: 15 }}
             size={35}
             onPress={() =>
-              navigation.navigate("UpdateCourse", { courseUp: course })
+              navigation.navigate("UpdateCourse", { course: course })
             }
           />
         </View>
