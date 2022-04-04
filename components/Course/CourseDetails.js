@@ -41,6 +41,15 @@ const CourseDetails = ({ route, navigation }) => {
             size={35}
             onPress={() => navigation.navigate("Drawer")}
           />
+          <Icon2
+            color={"white"}
+            name="update"
+            style={{ marginRight: 15 }}
+            size={35}
+            onPress={() =>
+              navigation.navigate("UpdateCourse", { courseUp: course })
+            }
+          />
         </View>
         <View style={styles.titleContainer}>
           <Text style={styles.Title}>{course.title}</Text>

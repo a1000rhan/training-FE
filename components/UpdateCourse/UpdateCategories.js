@@ -17,6 +17,10 @@ import { baseURL } from "../../stores/api";
 
 const UpdateCategories = ({ route, navigation }) => {
   const inComing = route.params.tempCourse;
+  console.log(
+    "🚀 ~ file: UpdateCategories.js ~ line 20 ~ UpdateCategories ~ inComing",
+    inComing
+  );
   const [course, setCourse] = useState({
     title: inComing.title,
     description: inComing.description,
@@ -109,7 +113,7 @@ const UpdateCategories = ({ route, navigation }) => {
             name="arrow-back-circle-sharp"
             size={35}
             onPress={() => {
-              navigation.navigate("AddCourse");
+              navigation.navigate("UpdateCourse");
             }}
           />
         </View>

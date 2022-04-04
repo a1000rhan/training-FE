@@ -13,13 +13,14 @@ import Icon from "react-native-vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 
-const UpdateCourse = ({ navigation }) => {
+const UpdateCourse = ({ navigation, route }) => {
+  const comCourse = route.params.courseUp;
   const [course, setCourse] = useState({
-    title: "",
-    time: "",
-    description: "",
-    image: "",
-    location: "",
+    title: comCourse.title,
+    time: comCourse.time,
+    description: comCourse.description,
+    date: comCourse.date,
+    location: comCourse.location,
   });
   const [isDateShow, setIsDateShow] = useState(true);
   const [isTimeShow, setIsTimeShow] = useState(true);
@@ -73,7 +74,7 @@ const UpdateCourse = ({ navigation }) => {
     };
 
     setCourse(tempCourse);
-    navigation.navigate("Categories", { course, tempCourse });
+    navigation.navigate("UpdateCategories", { course, tempCourse });
   };
 
   return (
@@ -89,13 +90,14 @@ const UpdateCourse = ({ navigation }) => {
             }}
           />
         </View>
-        <Text style={styles.Title}>Add New Course</Text>
+        <Text style={styles.Title}>Update Course</Text>
       </View>
       <View style={styles.container}>
         <View style={styles.comp}>
           <Text style={styles.label}>Course Title</Text>
           <TextInput
             style={styles.input}
+            value={course.title}
             placeholder={"Enter Course Title"}
             onChangeText={(value) => setCourse({ ...course, title: value })}
           />
@@ -105,6 +107,7 @@ const UpdateCourse = ({ navigation }) => {
           <TextInput
             style={styles.textField}
             multiline={true}
+            value={course.description}
             placeholder={"Enter Course Description"}
             onChangeText={(value) =>
               setCourse({ ...course, description: value })
@@ -178,11 +181,12 @@ const UpdateCourse = ({ navigation }) => {
           <Text style={styles.label}>Location</Text>
           <TextInput
             style={styles.input}
+            value={course.location}
             placeholder={"Enter Course Title"}
             onChangeText={(value) => setCourse({ ...course, location: value })}
           />
         </View>
-        <Button style={styles.btn} onPress={() => handleSubmit()}>
+        <Button style={styles.btn} onPress={handleSubmit}>
           <Text style={styles.btnTxt}>Next</Text>
         </Button>
       </View>
