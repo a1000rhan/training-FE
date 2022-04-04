@@ -74,6 +74,43 @@ class CourseStore {
       );
     }
   };
+  updateCourse = async (course, navigation) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("title", course.title);
+      formData.append("description", course.description);
+      formData.append("time", course.time);
+      formData.append("date", course.date);
+      formData.append("location", course.location);
+      formData.append("maxSeats", course.maxSeats);
+      formData.append("image", course.image);
+      course.skills.map((skill) => formData.append("skills", skill));
+      console.log(
+        "🚀 ~ file: courseStore.js ~ line 47 ~ CourseStore ~ createCourse= ~ formData",
+        formData
+      );
+
+      const res = await api({
+        method: "PUT",
+        url: "/courses",
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+        transformRequest: (data, error) => {
+          return formData;
+        },
+      });
+      this.fetchCourse();
+      navigation.navigate("Drawer");
+      this.course = res.data;
+      this.loading = false;
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: courseStore.js ~ line 26 ~ courseStore ~ deleteCourse= ~ error",
+        error
+      );
+    }
+  };
   joinCourse = async (course, navigation, toast) => {
     try {
       const res = await api.post(`/courses/${course._id}`);
