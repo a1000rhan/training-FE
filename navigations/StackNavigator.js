@@ -14,11 +14,11 @@ const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Notif"
         options={{ headerShown: false }}
         component={Notification}
-      /> */}
+      />
       <Stack.Screen
         name="Home"
         options={{ headerShown: false }}

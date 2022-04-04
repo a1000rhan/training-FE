@@ -26,7 +26,7 @@ const CourseList = ({ navigation }) => {
 
   const onRefresh = () => {
     if (courseStore.loading) {
-      setRefreshing(true);
+      setRefreshing(false);
     }
     courseStore.fetchCourse();
   };
