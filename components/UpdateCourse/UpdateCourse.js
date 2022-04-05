@@ -20,8 +20,13 @@ const UpdateCourse = ({ navigation, route }) => {
     <Loading />;
   }
   const UpCourse = route.params.course;
+  console.log(
+    "🚀 ~ file: UpdateCourse.js ~ line 23 ~ UpdateCourse ~ UpCourse",
+    UpCourse
+  );
 
   const [course, setCourse] = useState({
+    _id: UpCourse._id,
     title: UpCourse.title,
     time: UpCourse.time,
     description: UpCourse.description,
@@ -31,10 +36,7 @@ const UpdateCourse = ({ navigation, route }) => {
     image: UpCourse.image,
     skills: UpCourse.skills,
   });
-  console.log(
-    "🚀 ~ file: UpdateCourse.js ~ line 33 ~ UpdateCourse ~ course",
-    course
-  );
+
   const [isDateShow, setIsDateShow] = useState(true);
   const [isTimeShow, setIsTimeShow] = useState(true);
   const [startDate, setStartDate] = useState(new Date(Date.now()));
@@ -99,7 +101,7 @@ const UpdateCourse = ({ navigation, route }) => {
             name="arrow-back-circle-sharp"
             size={35}
             onPress={() => {
-              navigation.navigate("Drawer");
+              navigation.goBack();
             }}
           />
         </View>

@@ -100,10 +100,6 @@ const UpdateCategories = ({ route, navigation }) => {
     setNewSkills(newSkills.filter((skill, index) => index != selectedSkill));
   };
 
-  console.log(
-    "🚀 ~ file: Categories.js ~ line 88 ~ Categories ~ newSkills",
-    newSkills
-  );
   //...........handle Submit............
   const handleSubmit = () => {
     let tempCourse = { ...course, skills: newSkills };
@@ -119,9 +115,7 @@ const UpdateCategories = ({ route, navigation }) => {
             color={"white"}
             name="arrow-back-circle-sharp"
             size={35}
-            onPress={() =>
-              navigation.navigate("UpdateCourse", { course: course })
-            }
+            onPress={() => navigation.goBack()}
           />
         </View>
         <Text style={styles.title}>Update Course</Text>

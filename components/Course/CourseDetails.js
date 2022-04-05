@@ -15,12 +15,16 @@ const windowHeight = Dimensions.get("window").height;
 
 const CourseDetails = ({ route, navigation }) => {
   const course = route.params.course;
+  console.log(
+    "🚀 ~ file: CourseDetails.js ~ line 18 ~ CourseDetails ~ course",
+    course
+  );
   const toast = useToast();
 
   if (courseStore.loading) {
     <Loading />;
   }
-  const skillsArr = course.skills?.map((skill, index) => (
+  const skillsArr = course.skills.map((skill, index) => (
     <Chip key={index} style={styles.skl}>
       <Text style={styles.txtSkill}>{skill}</Text>
     </Chip>
@@ -41,15 +45,19 @@ const CourseDetails = ({ route, navigation }) => {
             size={35}
             onPress={() => navigation.navigate("Drawer")}
           />
-          <Icon2
-            color={"white"}
-            name="update"
-            style={{ marginRight: 15 }}
-            size={35}
-            onPress={() =>
-              navigation.navigate("UpdateCourse", { course: course })
-            }
-          />
+          {authStore.user.type === "student" ? (
+            <></>
+          ) : (
+            <Icon2
+              color={"white"}
+              name="update"
+              style={{ marginRight: 15 }}
+              size={35}
+              onPress={() =>
+                navigation.navigate("UpdateCourse", { course: course })
+              }
+            />
+          )}
         </View>
         <View style={styles.titleContainer}>
           <Text style={styles.Title}>{course.title}</Text>
@@ -131,13 +139,15 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     display: "flex",
+    width: "100%",
     flexDirection: "row",
     marginTop: windowHeight / 7,
     marginLeft: windowHeight / 20,
     position: "absolute",
   },
   Title: {
-    fontSize: 50,
+    fontSize: 40,
+
     color: "white",
     fontWeight: "bold",
   },

@@ -17,16 +17,18 @@ const RequestCard = ({ request }) => {
     <View style={styles.card}>
       <View style={styles.l1}>
         <Text style={styles.name}>
-          {request.firstName} {request.lastName}
+          {request?.firstName} {request?.lastName}
         </Text>
-        <Text>{request.course.date}</Text>
+        <Text>{request.course?.date}</Text>
       </View>
       <View style={styles.l2}>
         <Text style={styles.courseTitle}>Staff ID: </Text>
-        <Text style={styles.staffId}>{request.user.staffId}</Text>
+        <Text style={styles.staffId}>{request.user?.staffId}</Text>
       </View>
       <View style={styles.l3}>
-        <Text style={styles.courseTitle}>{request.course.title}</Text>
+        <View style={{ width: "50%" }}>
+          <Text style={styles.courseTitle}>{request.course?.title}</Text>
+        </View>
         {request.status == "pending" ? (
           <View style={{ flexDirection: "row" }}>
             <Button
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     flex: 1,
+    width: "95%",
     marginBottom: 10,
     shadowColor: "#000",
     shadowOffset: {

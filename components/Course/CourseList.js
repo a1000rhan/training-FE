@@ -39,8 +39,6 @@ const CourseList = ({ navigation }) => {
       <CourseItem course={course} key={course._id} navigation={navigation} />
     ));
 
-  console.log(authStore.profile);
-
   return (
     <>
       <View style={styles.searchBar}>

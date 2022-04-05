@@ -70,10 +70,6 @@ class AuthStore {
   };
 
   Signup = async (data, navigation, toast) => {
-    console.log(
-      "🚀 ~ file: AuthStore.js ~ line 69 ~ AuthStore ~ Signup= ~ data",
-      data
-    );
     try {
       const user = { staffId: data.staffId, password: data.password };
       const resp = await api.put("/user", user);
