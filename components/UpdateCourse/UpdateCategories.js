@@ -21,10 +21,6 @@ const UpdateCategories = ({ route, navigation }) => {
     <Loading />;
   }
   const inComing = route.params.course;
-  console.log(
-    "🚀 ~ file: UpdateCategories.js ~ line 24 ~ UpdateCategories ~ inComing",
-    inComing
-  );
 
   const [course, setCourse] = useState({
     _id: inComing._id,
@@ -37,6 +33,10 @@ const UpdateCategories = ({ route, navigation }) => {
     image: inComing.image,
     skills: inComing.skills,
   });
+  console.log(
+    "🚀 ~ file: UpdateCategories.js ~ line 37 ~ UpdateCategories ~ course",
+    course
+  );
 
   const [uploadedImage, setUploadedImage] = useState(baseURL + course.image);
 
@@ -137,7 +137,7 @@ const UpdateCategories = ({ route, navigation }) => {
           <TextInput
             style={styles.input}
             value={course.skills}
-            placeholder={"Enter Course Title"}
+            placeholder={"Enter Course Skills"}
             onChangeText={handelChangeSkill}
           />
 
