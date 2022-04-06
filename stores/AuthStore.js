@@ -59,7 +59,7 @@ class AuthStore {
       requestStore.fetchAllRequests();
       this.fetchUserProfile();
       this.loading = false;
-      navigation.replace("Drawer");
+      navigation.navigate("Drawer");
     } catch (error) {
       toast.show({
         title: "Sign in Failed",

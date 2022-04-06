@@ -9,11 +9,19 @@ import Signup from "../components/AuthUser/Signup";
 import AddCourse from "../components/NewCourse/AddCourse";
 import Signin from "../components/AuthUser/Signin";
 import Categories from "../components/NewCourse/Categories";
+import Location from "../components/NewCourse/Location"
+
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
+      
+      <Stack.Screen
+        name="Location"
+        options={{ headerShown: false }}
+        component={Location}
+      />
       <Stack.Screen
         name="Home"
         options={{ headerShown: false }}

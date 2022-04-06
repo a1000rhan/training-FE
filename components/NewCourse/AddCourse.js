@@ -12,6 +12,7 @@ import { Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
+// import Location from "./Location";
 
 const AddCourse = ({ navigation }) => {
   const [course, setCourse] = useState({
@@ -181,6 +182,8 @@ const AddCourse = ({ navigation }) => {
             placeholder={"Enter Course Title"}
             onChangeText={(value) => setCourse({ ...course, location: value })}
           />
+          {/* <Location/> */}
+          
         </View>
         <Button style={styles.btn} onPress={() => handleSubmit()}>
           <Text style={styles.btnTxt}>Next</Text>
